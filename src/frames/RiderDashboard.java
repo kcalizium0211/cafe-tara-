@@ -294,11 +294,19 @@ public class RiderDashboard extends javax.swing.JFrame {
 
     private void bttnupdatestatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnupdatestatusActionPerformed
         // TODO add your handling code here:
-        UpdateStatus update = new UpdateStatus();
-        
-        update.setVisible(true);
 
-        this.dispose();
+    JOptionPane.showMessageDialog(
+            this,
+            "Status has been updated successfully!"
+    );
+
+    // Open Rider Dashboard again
+    RiderDashboard rider =
+            new RiderDashboard();
+
+    rider.setVisible(true);
+
+    this.dispose();
     
 
     }//GEN-LAST:event_bttnupdatestatusActionPerformed
