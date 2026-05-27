@@ -8,6 +8,8 @@ package frames;
  *
  * @author HP
  */
+import javax.swing.table.DefaultTableModel;//used to import the DefaultTableModel class, which lets you manage data inside a JTable in java swing.
+import javax.swing.JOptionPane;
 public class RidersList extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RidersList.class.getName());
@@ -30,19 +32,20 @@ public class RidersList extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablerstatus = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        bttnus = new javax.swing.JButton();
+        bttnaddr = new javax.swing.JButton();
+        bttndelr = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(null);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablerstatus.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Rider ID", "Rider Name", "Status"
@@ -56,21 +59,134 @@ public class RidersList extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablerstatus);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 80, 350, 200);
+        jScrollPane1.setBounds(20, 50, 350, 200);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         jLabel1.setText("RIDERS STATUS");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(30, 50, 130, 20);
+        jLabel1.setBounds(30, 20, 130, 20);
+
+        bttnus.setFont(new java.awt.Font("Serif", 1, 12)); // NOI18N
+        bttnus.setText("Update Status");
+        bttnus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnusActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bttnus);
+        bttnus.setBounds(260, 260, 110, 24);
+
+        bttnaddr.setFont(new java.awt.Font("Serif", 1, 12)); // NOI18N
+        bttnaddr.setText("Add Rider");
+        bttnaddr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnaddrActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bttnaddr);
+        bttnaddr.setBounds(20, 260, 110, 24);
+
+        bttndelr.setFont(new java.awt.Font("Serif", 1, 12)); // NOI18N
+        bttndelr.setText("Delete Rider");
+        bttndelr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttndelrActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bttndelr);
+        bttndelr.setBounds(140, 260, 110, 24);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 390, 300);
+        jPanel1.setBounds(0, 0, 390, 340);
 
-        setBounds(0, 0, 400, 308);
+        setBounds(0, 0, 400, 343);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bttnusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnusActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model =
+    (DefaultTableModel) tablerstatus.getModel();
+
+    int row =
+    tablerstatus.getSelectedRow();
+
+    if(row != -1){
+
+        model.removeRow(row);
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Rider Removed!"
+        );
+
+    } else {
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Select rider first!"
+        );
+
+    }
+    }//GEN-LAST:event_bttnusActionPerformed
+
+    private void bttnaddrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnaddrActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model =
+    (DefaultTableModel) tablerstatus.getModel();
+
+    if(model.getRowCount() == 0){
+
+        model.addRow(new Object[]{
+            111,
+            "Kim",
+            "Available"
+        });
+
+        model.addRow(new Object[]{
+            222,
+            "Sam",
+            "Offline"
+        });
+
+        model.addRow(new Object[]{
+            333,
+            "Ja",
+            "Out for Delivery"
+        });
+
+    }
+    }//GEN-LAST:event_bttnaddrActionPerformed
+
+    private void bttndelrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttndelrActionPerformed
+        // TODO add your handling code here:
+            int row =
+    tablerstatus.getSelectedRow();
+
+    if(row != -1){
+
+        tablerstatus.setValueAt(
+            "Delivering",
+            row,
+            2
+        );
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Status Updated!"
+        );
+
+    } else {
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Select rider first!"
+        );
+
+    }
+    }//GEN-LAST:event_bttndelrActionPerformed
 
     /**
      * @param args the command line arguments
@@ -98,9 +214,12 @@ public class RidersList extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bttnaddr;
+    private javax.swing.JButton bttndelr;
+    private javax.swing.JButton bttnus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablerstatus;
     // End of variables declaration//GEN-END:variables
 }

@@ -38,7 +38,7 @@ public class Login extends javax.swing.JFrame {
         lblpass = new javax.swing.JLabel();
         cbrole = new javax.swing.JComboBox<>();
         bttnlogin = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
+        lblcontactadmin = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -109,9 +109,9 @@ public class Login extends javax.swing.JFrame {
         loginform.add(bttnlogin);
         bttnlogin.setBounds(110, 320, 72, 24);
 
-        jLabel6.setText("<html><u>No account? Contact Admin</u></html>");
-        loginform.add(jLabel6);
-        jLabel6.setBounds(80, 380, 151, 16);
+        lblcontactadmin.setText("<html><u>No account? Contact Admin</u></html>");
+        loginform.add(lblcontactadmin);
+        lblcontactadmin.setBounds(80, 380, 151, 16);
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/coffee_icon.png"))); // NOI18N
@@ -229,8 +229,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbrole;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel lblcontactadmin;
     private javax.swing.JLabel lblpass;
     private javax.swing.JLabel lblusername;
     private javax.swing.JPanel loginform;

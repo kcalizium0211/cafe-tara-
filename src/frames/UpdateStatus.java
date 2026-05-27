@@ -8,6 +8,7 @@ package frames;
  *
  * @author HP
  */
+import javax.swing.JOptionPane;//used to show popup dialog boxes in swing
 public class UpdateStatus extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(UpdateStatus.class.getName());
@@ -91,6 +92,11 @@ public class UpdateStatus extends javax.swing.JFrame {
         bttnupdatestatus.setBackground(new java.awt.Color(48, 48, 48));
         bttnupdatestatus.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
         bttnupdatestatus.setText("UPDATE STATUS");
+        bttnupdatestatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnupdatestatusActionPerformed(evt);
+            }
+        });
         jPanel1.add(bttnupdatestatus);
         bttnupdatestatus.setBounds(100, 300, 150, 23);
 
@@ -106,6 +112,22 @@ public class UpdateStatus extends javax.swing.JFrame {
 
         setBounds(0, 0, 375, 370);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bttnupdatestatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnupdatestatusActionPerformed
+        // TODO add your handling code here:
+            JOptionPane.showMessageDialog(
+            this,
+            "Status has been updated successfully!"
+    );
+
+    // open Rider dashboard again
+    RiderDashboard rider =
+            new RiderDashboard();
+
+    rider.setVisible(true);
+
+    this.dispose();
+    }//GEN-LAST:event_bttnupdatestatusActionPerformed
 
     /**
      * @param args the command line arguments

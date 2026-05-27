@@ -181,7 +181,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel6">
+        <Component class="javax.swing.JLabel" name="lblcontactadmin">
           <Properties>
             <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;u&gt;No account? Contact Admin&lt;/u&gt;&lt;/html&gt;"/>
           </Properties>

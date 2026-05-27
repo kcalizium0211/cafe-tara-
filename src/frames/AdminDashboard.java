@@ -91,17 +91,28 @@ public class AdminDashboard extends javax.swing.JFrame {
         jPanel2.add(bttnassigndeliveries);
         bttnassigndeliveries.setBounds(20, 170, 130, 23);
 
+        bttnriders.setBackground(new java.awt.Color(48, 48, 48));
         bttnriders.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        bttnriders.setForeground(new java.awt.Color(255, 255, 255));
         bttnriders.setText("Riders");
+        bttnriders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnridersActionPerformed(evt);
+            }
+        });
         jPanel2.add(bttnriders);
         bttnriders.setBounds(20, 250, 130, 23);
 
+        bttnprofile.setBackground(new java.awt.Color(48, 48, 48));
         bttnprofile.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        bttnprofile.setForeground(new java.awt.Color(255, 255, 255));
         bttnprofile.setText("Profile");
         jPanel2.add(bttnprofile);
         bttnprofile.setBounds(20, 290, 130, 23);
 
+        bttnlogout.setBackground(new java.awt.Color(48, 48, 48));
         bttnlogout.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        bttnlogout.setForeground(new java.awt.Color(255, 255, 255));
         bttnlogout.setText("logout");
         bttnlogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,6 +261,15 @@ public class AdminDashboard extends javax.swing.JFrame {
         this.dispose();
 
     }//GEN-LAST:event_bttnassigndeliveriesActionPerformed
+
+    private void bttnridersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnridersActionPerformed
+        // TODO add your handling code here:
+        RidersList rider = new RidersList();
+        
+        rider.setVisible(true);
+        
+        this.dispose();
+    }//GEN-LAST:event_bttnridersActionPerformed
 
     /**
      * @param args the command line arguments

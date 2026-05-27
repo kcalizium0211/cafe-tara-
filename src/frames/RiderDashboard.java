@@ -53,15 +53,15 @@ public class RiderDashboard extends javax.swing.JFrame {
         lblcompletedcount = new javax.swing.JLabel();
         lblout = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        ptotaldeliveries = new javax.swing.JPanel();
-        lbltotaldeliveries = new javax.swing.JLabel();
-        lbltotaldeliveriescount = new javax.swing.JLabel();
-        ptotaldeliveries1 = new javax.swing.JPanel();
-        lbltotaldeliveries1 = new javax.swing.JLabel();
-        lbltotaldeliveriescount1 = new javax.swing.JLabel();
-        ptotaldeliveries2 = new javax.swing.JPanel();
-        lbltotaldeliveries2 = new javax.swing.JLabel();
-        lbltotaldeliveriescount2 = new javax.swing.JLabel();
+        ppendingrcount = new javax.swing.JPanel();
+        lblpendingr = new javax.swing.JLabel();
+        lblpendingrcount = new javax.swing.JLabel();
+        poutfordelivery = new javax.swing.JPanel();
+        lbloutfordelivery = new javax.swing.JLabel();
+        lbloutfordeliverycount = new javax.swing.JLabel();
+        prcompleted = new javax.swing.JPanel();
+        lblrcompleted = new javax.swing.JLabel();
+        lblcompletedrcount = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -69,7 +69,9 @@ public class RiderDashboard extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setLayout(null);
 
+        bttnupdatestatus.setBackground(new java.awt.Color(48, 48, 48));
         bttnupdatestatus.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        bttnupdatestatus.setForeground(new java.awt.Color(255, 255, 255));
         bttnupdatestatus.setText("Update Status");
         bttnupdatestatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,7 +81,9 @@ public class RiderDashboard extends javax.swing.JFrame {
         jPanel2.add(bttnupdatestatus);
         bttnupdatestatus.setBounds(30, 210, 130, 23);
 
+        bttnrdashboard.setBackground(new java.awt.Color(48, 48, 48));
         bttnrdashboard.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        bttnrdashboard.setForeground(new java.awt.Color(255, 255, 255));
         bttnrdashboard.setText("Dashboard");
         bttnrdashboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,22 +93,30 @@ public class RiderDashboard extends javax.swing.JFrame {
         jPanel2.add(bttnrdashboard);
         bttnrdashboard.setBounds(30, 130, 130, 23);
 
+        bttnmydeliveries.setBackground(new java.awt.Color(48, 48, 48));
         bttnmydeliveries.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        bttnmydeliveries.setForeground(new java.awt.Color(255, 255, 255));
         bttnmydeliveries.setText("My Deliveries");
         jPanel2.add(bttnmydeliveries);
         bttnmydeliveries.setBounds(30, 170, 130, 23);
 
+        bttnhistory.setBackground(new java.awt.Color(48, 48, 48));
         bttnhistory.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        bttnhistory.setForeground(new java.awt.Color(255, 255, 255));
         bttnhistory.setText("History");
         jPanel2.add(bttnhistory);
         bttnhistory.setBounds(30, 250, 130, 23);
 
+        bttnprofile.setBackground(new java.awt.Color(48, 48, 48));
         bttnprofile.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        bttnprofile.setForeground(new java.awt.Color(255, 255, 255));
         bttnprofile.setText("Profile");
         jPanel2.add(bttnprofile);
         bttnprofile.setBounds(30, 290, 130, 23);
 
+        bttnlogout.setBackground(new java.awt.Color(48, 48, 48));
         bttnlogout.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        bttnlogout.setForeground(new java.awt.Color(255, 255, 255));
         bttnlogout.setText("logout");
         bttnlogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,13 +126,15 @@ public class RiderDashboard extends javax.swing.JFrame {
         jPanel2.add(bttnlogout);
         bttnlogout.setBounds(30, 330, 130, 23);
 
+        lblrider.setFont(new java.awt.Font("Serif", 0, 12)); // NOI18N
         lblrider.setText("Rider");
         jPanel2.add(lblrider);
-        lblrider.setBounds(70, 100, 37, 16);
+        lblrider.setBounds(70, 100, 37, 17);
 
+        lblridername.setFont(new java.awt.Font("Serif", 1, 12)); // NOI18N
         lblridername.setText("Rider's Name");
         jPanel2.add(lblridername);
-        lblridername.setBounds(50, 80, 80, 16);
+        lblridername.setBounds(50, 80, 80, 17);
 
         lblpfp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblpfp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/nopfp_icon.png"))); // NOI18N
@@ -213,56 +227,56 @@ public class RiderDashboard extends javax.swing.JFrame {
         jPanel10.add(jLabel4);
         jLabel4.setBounds(20, 210, 160, 14);
 
-        ptotaldeliveries.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(48, 48, 48), 2, true));
-        ptotaldeliveries.setLayout(null);
+        ppendingrcount.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(48, 48, 48), 2, true));
+        ppendingrcount.setLayout(null);
 
-        lbltotaldeliveries.setFont(new java.awt.Font("Segoe UI Emoji", 1, 12)); // NOI18N
-        lbltotaldeliveries.setText("Pending");
-        ptotaldeliveries.add(lbltotaldeliveries);
-        lbltotaldeliveries.setBounds(40, 70, 50, 14);
+        lblpendingr.setFont(new java.awt.Font("Segoe UI Emoji", 1, 12)); // NOI18N
+        lblpendingr.setText("Pending");
+        ppendingrcount.add(lblpendingr);
+        lblpendingr.setBounds(40, 70, 50, 14);
 
-        lbltotaldeliveriescount.setFont(new java.awt.Font("Segoe UI Black", 1, 48)); // NOI18N
-        lbltotaldeliveriescount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbltotaldeliveriescount.setText("3");
-        ptotaldeliveries.add(lbltotaldeliveriescount);
-        lbltotaldeliveriescount.setBounds(57, 18, 37, 45);
+        lblpendingrcount.setFont(new java.awt.Font("Segoe UI Black", 1, 48)); // NOI18N
+        lblpendingrcount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblpendingrcount.setText("3");
+        ppendingrcount.add(lblpendingrcount);
+        lblpendingrcount.setBounds(57, 18, 37, 45);
 
-        jPanel10.add(ptotaldeliveries);
-        ptotaldeliveries.setBounds(20, 80, 100, 100);
+        jPanel10.add(ppendingrcount);
+        ppendingrcount.setBounds(20, 80, 100, 100);
 
-        ptotaldeliveries1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(48, 48, 48), 2, true));
-        ptotaldeliveries1.setLayout(null);
+        poutfordelivery.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(48, 48, 48), 2, true));
+        poutfordelivery.setLayout(null);
 
-        lbltotaldeliveries1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 12)); // NOI18N
-        lbltotaldeliveries1.setText("Out");
-        ptotaldeliveries1.add(lbltotaldeliveries1);
-        lbltotaldeliveries1.setBounds(60, 70, 30, 14);
+        lbloutfordelivery.setFont(new java.awt.Font("Segoe UI Emoji", 1, 10)); // NOI18N
+        lbloutfordelivery.setText("Out for Delivery");
+        poutfordelivery.add(lbloutfordelivery);
+        lbloutfordelivery.setBounds(20, 70, 100, 14);
 
-        lbltotaldeliveriescount1.setFont(new java.awt.Font("Segoe UI Black", 1, 48)); // NOI18N
-        lbltotaldeliveriescount1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbltotaldeliveriescount1.setText("3");
-        ptotaldeliveries1.add(lbltotaldeliveriescount1);
-        lbltotaldeliveriescount1.setBounds(57, 18, 37, 45);
+        lbloutfordeliverycount.setFont(new java.awt.Font("Segoe UI Black", 1, 48)); // NOI18N
+        lbloutfordeliverycount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbloutfordeliverycount.setText("3");
+        poutfordelivery.add(lbloutfordeliverycount);
+        lbloutfordeliverycount.setBounds(57, 18, 37, 45);
 
-        jPanel10.add(ptotaldeliveries1);
-        ptotaldeliveries1.setBounds(150, 80, 100, 100);
+        jPanel10.add(poutfordelivery);
+        poutfordelivery.setBounds(150, 80, 100, 100);
 
-        ptotaldeliveries2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(48, 48, 48), 2, true));
-        ptotaldeliveries2.setLayout(null);
+        prcompleted.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(48, 48, 48), 2, true));
+        prcompleted.setLayout(null);
 
-        lbltotaldeliveries2.setFont(new java.awt.Font("Segoe UI Emoji", 1, 12)); // NOI18N
-        lbltotaldeliveries2.setText("Completed");
-        ptotaldeliveries2.add(lbltotaldeliveries2);
-        lbltotaldeliveries2.setBounds(30, 70, 70, 14);
+        lblrcompleted.setFont(new java.awt.Font("Segoe UI Emoji", 1, 12)); // NOI18N
+        lblrcompleted.setText("Completed");
+        prcompleted.add(lblrcompleted);
+        lblrcompleted.setBounds(30, 70, 70, 14);
 
-        lbltotaldeliveriescount2.setFont(new java.awt.Font("Segoe UI Black", 1, 48)); // NOI18N
-        lbltotaldeliveriescount2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbltotaldeliveriescount2.setText("3");
-        ptotaldeliveries2.add(lbltotaldeliveriescount2);
-        lbltotaldeliveriescount2.setBounds(57, 18, 37, 45);
+        lblcompletedrcount.setFont(new java.awt.Font("Segoe UI Black", 1, 48)); // NOI18N
+        lblcompletedrcount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblcompletedrcount.setText("3");
+        prcompleted.add(lblcompletedrcount);
+        lblcompletedrcount.setBounds(57, 18, 37, 45);
 
-        jPanel10.add(ptotaldeliveries2);
-        ptotaldeliveries2.setBounds(290, 80, 100, 100);
+        jPanel10.add(prcompleted);
+        prcompleted.setBounds(290, 80, 100, 100);
 
         getContentPane().add(jPanel10);
         jPanel10.setBounds(180, 0, 430, 420);
@@ -294,20 +308,11 @@ public class RiderDashboard extends javax.swing.JFrame {
 
     private void bttnupdatestatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnupdatestatusActionPerformed
         // TODO add your handling code here:
+    UpdateStatus update = new UpdateStatus();
 
-    JOptionPane.showMessageDialog(
-            this,
-            "Status has been updated successfully!"
-    );
-
-    // Open Rider Dashboard again
-    RiderDashboard rider =
-            new RiderDashboard();
-
-    rider.setVisible(true);
+    update.setVisible(true);
 
     this.dispose();
-    
 
     }//GEN-LAST:event_bttnupdatestatusActionPerformed
 
@@ -348,27 +353,27 @@ public class RiderDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblcompletedcount;
+    private javax.swing.JLabel lblcompletedrcount;
     private javax.swing.JLabel lblout;
     private javax.swing.JLabel lblout1;
     private javax.swing.JLabel lbloutcount1;
+    private javax.swing.JLabel lbloutfordelivery;
+    private javax.swing.JLabel lbloutfordeliverycount;
     private javax.swing.JLabel lblpending;
     private javax.swing.JLabel lblpendingcount1;
+    private javax.swing.JLabel lblpendingr;
+    private javax.swing.JLabel lblpendingrcount;
     private javax.swing.JLabel lblpfp;
+    private javax.swing.JLabel lblrcompleted;
     private javax.swing.JLabel lblrider;
     private javax.swing.JLabel lblriderdashboard;
     private javax.swing.JLabel lblridername;
-    private javax.swing.JLabel lbltotaldeliveries;
-    private javax.swing.JLabel lbltotaldeliveries1;
-    private javax.swing.JLabel lbltotaldeliveries2;
-    private javax.swing.JLabel lbltotaldeliveriescount;
-    private javax.swing.JLabel lbltotaldeliveriescount1;
-    private javax.swing.JLabel lbltotaldeliveriescount2;
     private javax.swing.JPanel pcompleted;
     private javax.swing.JPanel pout;
+    private javax.swing.JPanel poutfordelivery;
     private javax.swing.JPanel ppending;
-    private javax.swing.JPanel ptotaldeliveries;
-    private javax.swing.JPanel ptotaldeliveries1;
-    private javax.swing.JPanel ptotaldeliveries2;
+    private javax.swing.JPanel ppendingrcount;
+    private javax.swing.JPanel prcompleted;
     private javax.swing.JTable tassigneddeliveries;
     // End of variables declaration//GEN-END:variables
 }

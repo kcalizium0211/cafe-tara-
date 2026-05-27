@@ -8,6 +8,7 @@ package frames;
  *
  * @author HP
  */
+import javax.swing.JOptionPane;//used to show popup dialog boxes in swing
 public class AssignDelivery extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AssignDelivery.class.getName());
@@ -70,7 +71,7 @@ public class AssignDelivery extends javax.swing.JFrame {
         lblchooserider.setBounds(40, 240, 100, 30);
 
         cbrider.setFont(new java.awt.Font("Segoe UI Emoji", 1, 12)); // NOI18N
-        cbrider.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rider 1", "Rider 2", "Rider 3" }));
+        cbrider.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kim", "Sam", "Ja" }));
         jPanel1.add(cbrider);
         cbrider.setBounds(130, 240, 150, 30);
 
@@ -80,6 +81,11 @@ public class AssignDelivery extends javax.swing.JFrame {
 
         bttnupdatestatus.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         bttnupdatestatus.setText("UPDATE STATUS");
+        bttnupdatestatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnupdatestatusActionPerformed(evt);
+            }
+        });
         jPanel1.add(bttnupdatestatus);
         bttnupdatestatus.setBounds(70, 300, 210, 23);
 
@@ -96,6 +102,22 @@ public class AssignDelivery extends javax.swing.JFrame {
 
         setBounds(0, 0, 355, 375);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bttnupdatestatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnupdatestatusActionPerformed
+        // TODO add your handling code here:
+            JOptionPane.showMessageDialog(
+            this,
+            "Status has been updated successfully!"
+    );
+
+    // open admin dashboard again
+    AdminDashboard admin =
+            new AdminDashboard();
+
+    admin.setVisible(true);
+
+    this.dispose();
+    }//GEN-LAST:event_bttnupdatestatusActionPerformed
 
     /**
      * @param args the command line arguments
