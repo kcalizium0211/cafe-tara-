@@ -45,7 +45,7 @@ public class RiderProfile extends javax.swing.JFrame {
 
         lblad.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         lblad.setForeground(new java.awt.Color(62, 39, 35));
-        lblad.setText("ADMIN PROFILE");
+        lblad.setText("RIDER'S PROFILE");
 
         lblad1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         lblad1.setForeground(new java.awt.Color(62, 39, 35));
@@ -151,7 +151,7 @@ public class RiderProfile extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
         );
 
         pack();

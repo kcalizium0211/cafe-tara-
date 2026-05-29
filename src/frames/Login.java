@@ -43,20 +43,22 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        loginform.setBackground(new java.awt.Color(220, 220, 220));
+        loginform.setBackground(new java.awt.Color(210, 180, 140));
         loginform.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Kristen ITC", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(62, 39, 35));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("CAFE, ANO TARA?");
+        jLabel1.setText("KAPE, Ano Tara?");
         loginform.add(jLabel1);
-        jLabel1.setBounds(30, 80, 240, 32);
+        jLabel1.setBounds(30, 110, 240, 32);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Emoji", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(62, 39, 35));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("DELIVERY MONITORING SYSTEM");
         loginform.add(jLabel2);
-        jLabel2.setBounds(50, 110, 190, 14);
+        jLabel2.setBounds(50, 140, 190, 14);
 
         tfusername.setFont(new java.awt.Font("Serif", 0, 12)); // NOI18N
         tfusername.addActionListener(new java.awt.event.ActionListener() {
@@ -76,18 +78,22 @@ public class Login extends javax.swing.JFrame {
         pspass.setBounds(90, 220, 180, 30);
 
         lblusername.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
+        lblusername.setForeground(new java.awt.Color(62, 39, 35));
         lblusername.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblusername.setText("Username:");
         loginform.add(lblusername);
         lblusername.setBounds(20, 190, 70, 19);
 
         lblpass.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
+        lblpass.setForeground(new java.awt.Color(62, 39, 35));
         lblpass.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblpass.setText("Password:");
         loginform.add(lblpass);
         lblpass.setBounds(20, 220, 70, 19);
 
+        cbrole.setBackground(new java.awt.Color(111, 78, 55));
         cbrole.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
+        cbrole.setForeground(new java.awt.Color(62, 39, 35));
         cbrole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rider", "Admin" }));
         cbrole.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,7 +103,7 @@ public class Login extends javax.swing.JFrame {
         loginform.add(cbrole);
         cbrole.setBounds(50, 270, 210, 30);
 
-        bttnlogin.setBackground(new java.awt.Color(48, 48, 48));
+        bttnlogin.setBackground(new java.awt.Color(62, 39, 35));
         bttnlogin.setFont(new java.awt.Font("Serif", 1, 12)); // NOI18N
         bttnlogin.setForeground(new java.awt.Color(255, 255, 255));
         bttnlogin.setText("LOGIN");
@@ -109,14 +115,15 @@ public class Login extends javax.swing.JFrame {
         loginform.add(bttnlogin);
         bttnlogin.setBounds(110, 320, 72, 24);
 
+        lblcontactadmin.setForeground(new java.awt.Color(62, 39, 35));
         lblcontactadmin.setText("<html><u>No account? Contact Admin</u></html>");
         loginform.add(lblcontactadmin);
         lblcontactadmin.setBounds(80, 380, 151, 16);
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/coffee_icon.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/coffee bean.png"))); // NOI18N
         loginform.add(jLabel8);
-        jLabel8.setBounds(90, 10, 110, 90);
+        jLabel8.setBounds(90, 20, 110, 90);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
