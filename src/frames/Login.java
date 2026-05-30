@@ -5,6 +5,8 @@ import frames.AdminDashboard;
 import frames.RiderDashboard;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 import utility.FileHandler;
 import models.Admin;
 import models.Rider;
@@ -147,27 +149,37 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbRoleActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-    String username = txtUsername.getText();// Get username
-    String password = String.valueOf(txtPassword.getPassword());// Get password
-    String role = cmbRole.getSelectedItem().toString();// Get selected role
-    
-    // Admin login
-    if(role.equals("Admin")) {
-           Admin admin = new Admin(username, password);// Create admin object
-           admin.displayDashboard();  // Polymorphism
-           AdminDashboard ad = new AdminDashboard();  // Open admin dashboard
-           ad.setVisible(true);
-           dispose(); // Close login
+    String username = txtUsername.getText();
+    String password = String.valueOf(txtPassword.getPassword());
+    String role = cmbRole.getSelectedItem().toString();
+
+    if (username.isEmpty() || password.isEmpty()) {
+     JOptionPane.showMessageDialog(this, "Please enter username and password.");
+        return;
+    } try {
+    BufferedWriter writer = new BufferedWriter(
+    new FileWriter("src/utility/userinfo.txt", true));
+    writer.write(username + "," + password + "," + role);
+    writer.newLine();
+    writer.close();
+    JOptionPane.showMessageDialog(this, "Account Saved! Logging in...");
+    txtUsername.setText("");
+    txtPassword.setText("");
+
+    // Open dashboard based on role
+    if (role.equals("Admin")) {
+        AdminDashboard ad = new AdminDashboard();
+        ad.setVisible(true);
+        dispose();
+    } else {
+        RiderDashboard rd = new RiderDashboard();
+        rd.setVisible(true);
+        dispose();
     }
-    // Rider login
-    else {
-            Rider rider = new Rider(username, password, "Available");  // Create rider object
-            rider.displayDashboard(); // Polymorphism
-            RiderDashboard rd =new RiderDashboard(); // Open rider dashboard
-            rd.setVisible(true);
-            dispose(); // Close login
+
+     } catch (IOException e) {
+    JOptionPane.showMessageDialog(this, e);
     }
-    
     }//GEN-LAST:event_btnLoginActionPerformed
 
     public static void main(String args[]) {
