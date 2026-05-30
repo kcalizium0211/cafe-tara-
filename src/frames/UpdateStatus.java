@@ -27,129 +27,162 @@ public class UpdateStatus extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        lbldeliverydetails = new javax.swing.JLabel();
-        lbldeliveryid = new javax.swing.JLabel();
-        lblcustomer = new javax.swing.JLabel();
-        lbladdress = new javax.swing.JLabel();
-        lblcurrstatus = new javax.swing.JLabel();
-        lblupdatestatus = new javax.swing.JLabel();
-        lblnewstatus = new javax.swing.JLabel();
-        cbstatus = new javax.swing.JComboBox<>();
+        DeliveryStatusBoard = new javax.swing.JPanel();
+        lblDeliveryDetails = new javax.swing.JLabel();
+        lblDeliveryID = new javax.swing.JLabel();
+        lblCustomer = new javax.swing.JLabel();
+        lblAddress = new javax.swing.JLabel();
+        lblCurrentStatus = new javax.swing.JLabel();
+        UpdateStatus = new javax.swing.JLabel();
+        lblSelectNewStat = new javax.swing.JLabel();
+        cmbStatus = new javax.swing.JComboBox<>();
         lblusnotes = new javax.swing.JLabel();
-        bttnupdatestatus = new javax.swing.JButton();
+        btnUpdateStatus = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tausnotes = new javax.swing.JTextArea();
-        bttnus = new javax.swing.JButton();
+        textArea_Notes = new javax.swing.JTextArea();
+        btnBacktoDashboard = new javax.swing.JButton();
+        txtCurrentStatus = new javax.swing.JTextField();
+        txtDeliveryId = new javax.swing.JTextField();
+        txtCustomerName = new javax.swing.JTextField();
+        txtAddress = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jPanel1.setBackground(new java.awt.Color(210, 180, 140));
-        jPanel1.setLayout(null);
+        DeliveryStatusBoard.setBackground(new java.awt.Color(210, 180, 140));
+        DeliveryStatusBoard.setLayout(null);
 
-        lbldeliverydetails.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        lbldeliverydetails.setForeground(new java.awt.Color(62, 39, 35));
-        lbldeliverydetails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbldeliverydetails.setText("DELIVERY DETAILS");
-        jPanel1.add(lbldeliverydetails);
-        lbldeliverydetails.setBounds(20, 20, 190, 20);
+        lblDeliveryDetails.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        lblDeliveryDetails.setForeground(new java.awt.Color(62, 39, 35));
+        lblDeliveryDetails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDeliveryDetails.setText("DELIVERY DETAILS");
+        DeliveryStatusBoard.add(lblDeliveryDetails);
+        lblDeliveryDetails.setBounds(20, 20, 190, 20);
 
-        lbldeliveryid.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        lbldeliveryid.setForeground(new java.awt.Color(62, 39, 35));
-        lbldeliveryid.setText("Delivery ID:");
-        jPanel1.add(lbldeliveryid);
-        lbldeliveryid.setBounds(30, 50, 70, 16);
+        lblDeliveryID.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        lblDeliveryID.setForeground(new java.awt.Color(62, 39, 35));
+        lblDeliveryID.setText("Delivery ID:");
+        DeliveryStatusBoard.add(lblDeliveryID);
+        lblDeliveryID.setBounds(30, 50, 70, 16);
 
-        lblcustomer.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        lblcustomer.setForeground(new java.awt.Color(62, 39, 35));
-        lblcustomer.setText("Customer:");
-        jPanel1.add(lblcustomer);
-        lblcustomer.setBounds(30, 70, 60, 16);
+        lblCustomer.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        lblCustomer.setForeground(new java.awt.Color(62, 39, 35));
+        lblCustomer.setText("Customer:");
+        DeliveryStatusBoard.add(lblCustomer);
+        lblCustomer.setBounds(30, 70, 60, 16);
 
-        lbladdress.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        lbladdress.setForeground(new java.awt.Color(62, 39, 35));
-        lbladdress.setText("Address:");
-        jPanel1.add(lbladdress);
-        lbladdress.setBounds(30, 90, 50, 16);
+        lblAddress.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        lblAddress.setForeground(new java.awt.Color(62, 39, 35));
+        lblAddress.setText("Address:");
+        DeliveryStatusBoard.add(lblAddress);
+        lblAddress.setBounds(30, 90, 50, 16);
 
-        lblcurrstatus.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        lblcurrstatus.setForeground(new java.awt.Color(62, 39, 35));
-        lblcurrstatus.setText("Current Status:");
-        jPanel1.add(lblcurrstatus);
-        lblcurrstatus.setBounds(30, 110, 90, 16);
+        lblCurrentStatus.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        lblCurrentStatus.setForeground(new java.awt.Color(62, 39, 35));
+        lblCurrentStatus.setText("Current Status:");
+        DeliveryStatusBoard.add(lblCurrentStatus);
+        lblCurrentStatus.setBounds(30, 110, 90, 16);
 
-        lblupdatestatus.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        lblupdatestatus.setForeground(new java.awt.Color(62, 39, 35));
-        lblupdatestatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblupdatestatus.setText("UPDATE STATUS");
-        jPanel1.add(lblupdatestatus);
-        lblupdatestatus.setBounds(20, 140, 140, 19);
+        UpdateStatus.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        UpdateStatus.setForeground(new java.awt.Color(62, 39, 35));
+        UpdateStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        UpdateStatus.setText("UPDATE STATUS");
+        DeliveryStatusBoard.add(UpdateStatus);
+        UpdateStatus.setBounds(20, 140, 140, 19);
 
-        lblnewstatus.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        lblnewstatus.setForeground(new java.awt.Color(62, 39, 35));
-        lblnewstatus.setText("Select New Status:");
-        jPanel1.add(lblnewstatus);
-        lblnewstatus.setBounds(30, 170, 100, 16);
+        lblSelectNewStat.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        lblSelectNewStat.setForeground(new java.awt.Color(62, 39, 35));
+        lblSelectNewStat.setText("Select New Status:");
+        DeliveryStatusBoard.add(lblSelectNewStat);
+        lblSelectNewStat.setBounds(30, 170, 100, 16);
 
-        cbstatus.setBackground(new java.awt.Color(111, 78, 55));
-        cbstatus.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        cbstatus.setForeground(new java.awt.Color(62, 39, 35));
-        cbstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pending", "Picked Up", "Out for Delivery", "Delivered" }));
-        jPanel1.add(cbstatus);
-        cbstatus.setBounds(150, 170, 150, 22);
+        cmbStatus.setBackground(new java.awt.Color(111, 78, 55));
+        cmbStatus.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        cmbStatus.setForeground(new java.awt.Color(62, 39, 35));
+        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pending", "Picked Up", "Out for Delivery", "Delivered" }));
+        DeliveryStatusBoard.add(cmbStatus);
+        cmbStatus.setBounds(150, 170, 150, 22);
 
         lblusnotes.setBackground(new java.awt.Color(243, 233, 220));
         lblusnotes.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         lblusnotes.setForeground(new java.awt.Color(62, 39, 35));
         lblusnotes.setText("Notes (Optional):");
-        jPanel1.add(lblusnotes);
+        DeliveryStatusBoard.add(lblusnotes);
         lblusnotes.setBounds(40, 200, 110, 16);
 
-        bttnupdatestatus.setBackground(new java.awt.Color(111, 78, 55));
-        bttnupdatestatus.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        bttnupdatestatus.setForeground(new java.awt.Color(243, 233, 220));
-        bttnupdatestatus.setText("UPDATE STATUS");
-        bttnupdatestatus.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdateStatus.setBackground(new java.awt.Color(111, 78, 55));
+        btnUpdateStatus.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnUpdateStatus.setForeground(new java.awt.Color(243, 233, 220));
+        btnUpdateStatus.setText("UPDATE STATUS");
+        btnUpdateStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttnupdatestatusActionPerformed(evt);
+                btnUpdateStatusActionPerformed(evt);
             }
         });
-        jPanel1.add(bttnupdatestatus);
-        bttnupdatestatus.setBounds(50, 300, 260, 23);
+        DeliveryStatusBoard.add(btnUpdateStatus);
+        btnUpdateStatus.setBounds(50, 300, 260, 23);
 
-        tausnotes.setColumns(20);
-        tausnotes.setRows(5);
-        jScrollPane1.setViewportView(tausnotes);
+        textArea_Notes.setColumns(20);
+        textArea_Notes.setRows(5);
+        jScrollPane1.setViewportView(textArea_Notes);
 
-        jPanel1.add(jScrollPane1);
+        DeliveryStatusBoard.add(jScrollPane1);
         jScrollPane1.setBounds(30, 220, 300, 70);
 
-        bttnus.setBackground(new java.awt.Color(111, 78, 55));
-        bttnus.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        bttnus.setForeground(new java.awt.Color(243, 233, 220));
-        bttnus.setText("BACK TO DASHBOARD");
-        bttnus.addActionListener(new java.awt.event.ActionListener() {
+        btnBacktoDashboard.setBackground(new java.awt.Color(111, 78, 55));
+        btnBacktoDashboard.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnBacktoDashboard.setForeground(new java.awt.Color(243, 233, 220));
+        btnBacktoDashboard.setText("BACK TO DASHBOARD");
+        btnBacktoDashboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttnusActionPerformed(evt);
+                btnBacktoDashboardActionPerformed(evt);
             }
         });
-        jPanel1.add(bttnus);
-        bttnus.setBounds(50, 330, 260, 23);
+        DeliveryStatusBoard.add(btnBacktoDashboard);
+        btnBacktoDashboard.setBounds(50, 330, 260, 23);
+        DeliveryStatusBoard.add(txtCurrentStatus);
+        txtCurrentStatus.setBounds(150, 110, 180, 22);
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 360, 370);
+        txtDeliveryId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDeliveryIdActionPerformed(evt);
+            }
+        });
+        DeliveryStatusBoard.add(txtDeliveryId);
+        txtDeliveryId.setBounds(150, 50, 180, 22);
+
+        txtCustomerName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCustomerNameActionPerformed(evt);
+            }
+        });
+        DeliveryStatusBoard.add(txtCustomerName);
+        txtCustomerName.setBounds(150, 70, 180, 22);
+        DeliveryStatusBoard.add(txtAddress);
+        txtAddress.setBounds(150, 90, 180, 22);
+
+        getContentPane().add(DeliveryStatusBoard);
+        DeliveryStatusBoard.setBounds(0, 0, 360, 370);
 
         setBounds(0, 0, 375, 370);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bttnupdatestatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnupdatestatusActionPerformed
+    private void btnUpdateStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateStatusActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bttnupdatestatusActionPerformed
+    }//GEN-LAST:event_btnUpdateStatusActionPerformed
 
-    private void bttnusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnusActionPerformed
+    private void btnBacktoDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBacktoDashboardActionPerformed
+       new RiderDashboard().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnBacktoDashboardActionPerformed
+
+    private void txtDeliveryIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDeliveryIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bttnusActionPerformed
+    }//GEN-LAST:event_txtDeliveryIdActionPerformed
+
+    private void txtCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCustomerNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCustomerNameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,19 +209,23 @@ public class UpdateStatus extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bttnupdatestatus;
-    private javax.swing.JButton bttnus;
-    private javax.swing.JComboBox<String> cbstatus;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel DeliveryStatusBoard;
+    private javax.swing.JLabel UpdateStatus;
+    private javax.swing.JButton btnBacktoDashboard;
+    private javax.swing.JButton btnUpdateStatus;
+    private javax.swing.JComboBox<String> cmbStatus;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbladdress;
-    private javax.swing.JLabel lblcurrstatus;
-    private javax.swing.JLabel lblcustomer;
-    private javax.swing.JLabel lbldeliverydetails;
-    private javax.swing.JLabel lbldeliveryid;
-    private javax.swing.JLabel lblnewstatus;
-    private javax.swing.JLabel lblupdatestatus;
+    private javax.swing.JLabel lblAddress;
+    private javax.swing.JLabel lblCurrentStatus;
+    private javax.swing.JLabel lblCustomer;
+    private javax.swing.JLabel lblDeliveryDetails;
+    private javax.swing.JLabel lblDeliveryID;
+    private javax.swing.JLabel lblSelectNewStat;
     private javax.swing.JLabel lblusnotes;
-    private javax.swing.JTextArea tausnotes;
+    private javax.swing.JTextArea textArea_Notes;
+    private javax.swing.JTextField txtAddress;
+    private javax.swing.JTextField txtCurrentStatus;
+    private javax.swing.JTextField txtCustomerName;
+    private javax.swing.JTextField txtDeliveryId;
     // End of variables declaration//GEN-END:variables
 }

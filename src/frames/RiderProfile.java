@@ -34,8 +34,8 @@ public class RiderProfile extends javax.swing.JFrame {
         lblad3 = new javax.swing.JLabel();
         lblad4 = new javax.swing.JLabel();
         lblpfp = new javax.swing.JLabel();
-        bttnus = new javax.swing.JButton();
-        bttnus1 = new javax.swing.JButton();
+        btnBacktoDashboard = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,23 +67,23 @@ public class RiderProfile extends javax.swing.JFrame {
         lblpfp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/profile3.png"))); // NOI18N
         lblpfp.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        bttnus.setBackground(new java.awt.Color(111, 78, 55));
-        bttnus.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        bttnus.setForeground(new java.awt.Color(243, 233, 220));
-        bttnus.setText("BACK TO DASHBOARD");
-        bttnus.addActionListener(new java.awt.event.ActionListener() {
+        btnBacktoDashboard.setBackground(new java.awt.Color(111, 78, 55));
+        btnBacktoDashboard.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnBacktoDashboard.setForeground(new java.awt.Color(243, 233, 220));
+        btnBacktoDashboard.setText("BACK TO DASHBOARD");
+        btnBacktoDashboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttnusActionPerformed(evt);
+                btnBacktoDashboardActionPerformed(evt);
             }
         });
 
-        bttnus1.setBackground(new java.awt.Color(111, 78, 55));
-        bttnus1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        bttnus1.setForeground(new java.awt.Color(243, 233, 220));
-        bttnus1.setText("LOG OUT");
-        bttnus1.addActionListener(new java.awt.event.ActionListener() {
+        btnLogout.setBackground(new java.awt.Color(111, 78, 55));
+        btnLogout.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnLogout.setForeground(new java.awt.Color(243, 233, 220));
+        btnLogout.setText("LOG OUT");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttnus1ActionPerformed(evt);
+                btnLogoutActionPerformed(evt);
             }
         });
 
@@ -95,27 +95,29 @@ public class RiderProfile extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(lblpfp)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(lblad, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(lblad1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(lblad2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(lblad3, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(lblad4, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGap(15, 15, 15)
+                                    .addComponent(lblad, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                        .addGap(23, 23, 23)
+                                        .addComponent(lblad1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(lblad2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblad3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGap(23, 23, 23)
+                                    .addComponent(lblad4, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(8, 8, 8)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bttnus1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bttnus, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBacktoDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -134,9 +136,9 @@ public class RiderProfile extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblad4)
                 .addGap(75, 75, 75)
-                .addComponent(bttnus)
+                .addComponent(btnBacktoDashboard)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bttnus1)
+                .addComponent(btnLogout)
                 .addContainerGap(63, Short.MAX_VALUE))
         );
 
@@ -157,13 +159,15 @@ public class RiderProfile extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bttnusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnusActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bttnusActionPerformed
+    private void btnBacktoDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBacktoDashboardActionPerformed
+       new RiderDashboard().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnBacktoDashboardActionPerformed
 
-    private void bttnus1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnus1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bttnus1ActionPerformed
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+      new Login().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,8 +205,8 @@ public class RiderProfile extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bttnus;
-    private javax.swing.JButton bttnus1;
+    private javax.swing.JButton btnBacktoDashboard;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblad;
