@@ -1,108 +1,96 @@
-
 package frames;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import utility.FileHandler;
-import models.Rider;
-import models.Delivery;
+import java.io.BufferedReader; // used to read text files line by line
+import java.io.FileReader; // used to open and read files
+import javax.swing.JOptionPane; // used for popup messages
+import javax.swing.table.DefaultTableModel; // used to manage table data
+import utility.FileHandler; // import file handling utility class
+import models.Rider; // import rider model class
+import models.Delivery; // import delivery model class
 
+public class RiderDashboard extends javax.swing.JFrame { // create rider dashboard form
+private Rider rider; // variable to store logged in rider
 
-public class RiderDashboard extends javax.swing.JFrame {
-
-private Rider rider;
-
-public RiderDashboard(Rider rider) {
-    initComponents();
-    this.rider = rider;
-    loadRiderName();
-    loadDeliveries(rider.getUsername());
-    loadStats();
+public RiderDashboard(Rider rider) { // constructor with rider parameter
+    initComponents(); // initialize form components
+    this.rider = rider; // store rider object into variable
+    loadRiderName(); // load rider full name
+    loadDeliveries(rider.getUsername()); // load deliveries assigned to rider
+    loadStats(); // load delivery statistics
 }
 
-public RiderDashboard() {
-    initComponents();
+public RiderDashboard() { // default constructor
+    initComponents(); // initialize form components
 }
 
-    
-public void loadDeliveries(String loggedInRider) {
+public void loadDeliveries(String loggedInRider) { // method to load rider deliveries
+    try { // start try block
+        BufferedReader br = new BufferedReader(new FileReader("deliveries.txt")); // open deliveries file
+        String line; // variable to store each line
+        DefaultTableModel model = new DefaultTableModel( // create table model
+            new Object[]{"Delivery ID", "Customer Name", "Address", "Notes", "Status"}, 0);
+       
+        tblAssignedDeliveryInfo.setModel(model); // set table model
+        tblAssignedDeliveryInfo.getColumnModel().getColumn(3).setMinWidth(0); // hide notes column
+        tblAssignedDeliveryInfo.getColumnModel().getColumn(3).setMaxWidth(0); // hide notes column
+        tblAssignedDeliveryInfo.getColumnModel().getColumn(3).setWidth(0); // hide notes column
 
-    try {
-        BufferedReader br = new BufferedReader(new FileReader("deliveries.txt"));
-        String line;
-        DefaultTableModel model = new DefaultTableModel(
-        new Object[]{"Delivery ID", "Customer Name", "Address", "Notes", "Status"}, 0
-        );
-        
-        tblAssignedDeliveryInfo.setModel(model);
-        tblAssignedDeliveryInfo.getColumnModel().getColumn(3).setMinWidth(0);
-        tblAssignedDeliveryInfo.getColumnModel().getColumn(3).setMaxWidth(0);
-        tblAssignedDeliveryInfo.getColumnModel().getColumn(3).setWidth(0);
-
-        while ((line = br.readLine()) != null) {
-
-            String[] data = line.split(",",6);
-
-            if (data.length < 6) continue;
-
-            String rider = data[4].trim(); // assigned rider
-
-            // ONLY SHOW LOGGED-IN RIDER'S DELIVERY
+        while ((line = br.readLine()) != null) { // read file line by line
+            String[] data = line.split(",",6); // split line into 6 parts
+            if (data.length < 6) continue; // skip incomplete data
+            String rider = data[4].trim(); // get assigned rider name
+           
+            // check if delivery belongs to logged in rider
             if (rider.equalsIgnoreCase(loggedInRider)) {
-
-            Delivery d = new Delivery(data[0], data[1], data[2], data[3], data[4], data[5]);
-                model.addRow(new Object[]{
-                d.getDeliveryID(),
-                d.getCustomerName(),
-                d.getAddress(),
-                d.getNotes(),   // hidden but stored
-                d.getStatus()
+            Delivery d = new Delivery(data[0], data[1], data[2], data[3], data[4], data[5]); // create delivery object
+                model.addRow(new Object[]{ // add delivery data into table
+                d.getDeliveryID(), // get delivery id
+                d.getCustomerName(), // get customer name
+                d.getAddress(), // get customer address
+                d.getNotes(), // get notes
+                d.getStatus() // get delivery status
             });
             }
         }
-        br.close();
-        tblAssignedDeliveryInfo.getColumnModel().getColumn(3).setMinWidth(0);
-        tblAssignedDeliveryInfo.getColumnModel().getColumn(3).setMaxWidth(0);
-        tblAssignedDeliveryInfo.getColumnModel().getColumn(3).setWidth(0);
-    } catch (Exception e) {
-        System.out.println(e);
+
+        br.close(); // close file reader
+            
+        tblAssignedDeliveryInfo.getColumnModel().getColumn(3).setMinWidth(0); // hide notes column
+        tblAssignedDeliveryInfo.getColumnModel().getColumn(3).setMaxWidth(0); // hide notes column
+        tblAssignedDeliveryInfo.getColumnModel().getColumn(3).setWidth(0); // hide notes column
+
+        } catch (Exception e) { // catch errors
+            System.out.println(e); // print error in console
+        }
     }
-}
 
-    public void loadStats() {
-    int[] stats = FileHandler.getDeliveryStats();
-
-    lblCountPending.setText(String.valueOf(stats[0]));
-    lblCountOutDelivery.setText(String.valueOf(stats[1]));
-    lblCountDeliver.setText(String.valueOf(stats[2]));
+    public void loadStats() { // method to load delivery statistics
+    int[] stats = FileHandler.getDeliveryStats(); // get statistics from filehandler
+    lblCountPending.setText(String.valueOf(stats[0])); // display pending deliveries
+    lblCountOutDelivery.setText(String.valueOf(stats[1])); // display out for delivery count
+    lblCountDeliver.setText(String.valueOf(stats[2])); // display delivered count
     }
     
-    private void loadRiderName() {
+    private void loadRiderName() { // method to load rider full name
+    try { // start try block
 
-    try {
-        BufferedReader br = new BufferedReader(new FileReader("userinfo.txt"));
-        String line;
-
-        while ((line = br.readLine()) != null) {
-
-            String[] data = line.split(",");
-
-            if (data.length >= 10 &&
-                data[1].trim().equalsIgnoreCase(rider.getUsername())) {
-
-                lblRiderName.setText(data[4]); // Full Name
-                break;
+        BufferedReader br = new BufferedReader(new FileReader("userinfo.txt")); // open user info file
+        String line; // variable to store each line
+        
+        while ((line = br.readLine()) != null) { // read file line by line
+            String[] data = line.split(","); // split line by comma
+            if (data.length >= 10 && // check if data is complete
+                data[1].trim().equalsIgnoreCase(rider.getUsername())) { // check matching username
+                
+                lblRiderName.setText(data[4]); // display full name
+                break; // stop loop after finding rider
             }
         }
-
-        br.close();
-
-    } catch (Exception e) {
-        e.printStackTrace();
+        br.close(); // close file reader
+        } catch (Exception e) { // catch errors
+            e.printStackTrace(); // print error details
+        }
     }
-}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -269,7 +257,7 @@ public void loadDeliveries(String loggedInRider) {
             }
         });
         RiderInfo.add(btnUpdateStatus);
-        btnUpdateStatus.setBounds(20, 190, 130, 23);
+        btnUpdateStatus.setBounds(10, 190, 150, 23);
 
         btnProfile.setBackground(new java.awt.Color(243, 233, 220));
         btnProfile.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -329,14 +317,15 @@ public void loadDeliveries(String loggedInRider) {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
     int choice = JOptionPane.showConfirmDialog(this,  "Are you sure you want to log out?", "Confirm Logout", JOptionPane.YES_NO_OPTION);
 
     if (choice == JOptionPane.YES_OPTION) {
-    this.dispose(); // close current dashboard
-    new Login().setVisible(true); // go back to login
+        this.dispose(); // close current dashboard
+        new Login().setVisible(true); // go back to login
     }
         dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
@@ -347,27 +336,26 @@ public void loadDeliveries(String loggedInRider) {
     }//GEN-LAST:event_btnProfileActionPerformed
 
     private void btnUpdateStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateStatusActionPerformed
-        int row = tblAssignedDeliveryInfo.getSelectedRow(); // get selected row
+        int row = tblAssignedDeliveryInfo.getSelectedRow(); // get the selected row from table
 
-        if (row == -1) { // if nothing selected
-        JOptionPane.showMessageDialog(this, "Please select a delivery first.");
-        return;
-    }
+        if (row == -1) { // check if no row is selected
+            JOptionPane.showMessageDialog(this, "Please select a delivery first."); // show warning message
+        return; // stop the code
+        }
 
-    // get selected delivery data
-        String deliveryId = tblAssignedDeliveryInfo.getValueAt(row, 0).toString();
-        String customer = tblAssignedDeliveryInfo.getValueAt(row, 1).toString();
-        String address = tblAssignedDeliveryInfo.getValueAt(row, 2).toString();
-        String notes = tblAssignedDeliveryInfo.getValueAt(row, 3).toString();
-        String status = tblAssignedDeliveryInfo.getValueAt(row, 4).toString();
+        // get delivery information from selected row
+        String deliveryId = tblAssignedDeliveryInfo.getValueAt(row, 0).toString(); // get delivery id
+        String customer = tblAssignedDeliveryInfo.getValueAt(row, 1).toString(); // get customer name
+        String address = tblAssignedDeliveryInfo.getValueAt(row, 2).toString(); // get address
+        String notes = tblAssignedDeliveryInfo.getValueAt(row, 3).toString(); // get notes
+        String status = tblAssignedDeliveryInfo.getValueAt(row, 4).toString(); // get status
 
-        Delivery selected = new Delivery(deliveryId, customer, address, notes, rider.getUsername(), status);
-        UpdateStatus us = new UpdateStatus(selected, rider);
-        us.setVisible(true);
-        dispose();
+        Delivery selected = new Delivery(deliveryId, customer, address, notes, rider.getUsername(), status); // create delivery object
+        UpdateStatus us = new UpdateStatus(selected, rider); // create update status form
+        us.setVisible(true); // show update status form
+        dispose(); // close current form
     }//GEN-LAST:event_btnUpdateStatusActionPerformed
 
-   
     public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(new Runnable() {

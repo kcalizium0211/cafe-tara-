@@ -1,57 +1,51 @@
 package frames;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import javax.swing.JOptionPane;
-import javax.swing.JComboBox;
-import javax.swing.table.DefaultTableModel;
-import utility.FileHandler;
-import models.Delivery;
+import java.io.BufferedReader; // used to read text files line by line
+import java.io.FileReader; // used to open and read files
+import java.io.IOException; // handles file reading errors
+import javax.swing.JOptionPane; // used for popup messages
+import javax.swing.JComboBox; // used for combo box component
+import javax.swing.table.DefaultTableModel; // used to manage table data
+import utility.FileHandler; // import file handling utility class
+import models.Delivery; // import delivery model class
 
 
-public class AdminDashboard extends javax.swing.JFrame {
-
-  
-    public AdminDashboard() {
-        initComponents();
-        loadDeliveries();
-        loadStats();
+public class AdminDashboard extends javax.swing.JFrame { // create admin dashboard form
+    public AdminDashboard() { // constructor for admin dashboard
+        initComponents(); // initialize form components
+        loadDeliveries(); // load delivery data into table
+        loadStats(); // load delivery statistics
     }
 
-    public void loadDeliveries() {
-    try {
-        BufferedReader br = new BufferedReader(new FileReader("deliveries.txt"));
-        String line;
-        DefaultTableModel model = (DefaultTableModel) tblRecentDelivery.getModel();
-        model.setRowCount(0);
-        while ((line = br.readLine()) != null) {
-            String[] data = line.split(",",6);
-          if (data.length < 6) continue;
-            Delivery d = new Delivery(data[0], data[1], data[2], data[3], data[4], data[5]);
-            model.addRow(new Object[]{
-                d.getDeliveryID(),
-                d.getAssignedRider(),
-                d.getStatus(),
-                d.getNotes()
+    public void loadDeliveries() { // method to load deliveries from file
+    try { // start try block to catch errors
+        BufferedReader br = new BufferedReader(new FileReader("deliveries.txt")); // open deliveries file for reading
+        String line; // variable to store each line from file
+        DefaultTableModel model = (DefaultTableModel) tblRecentDelivery.getModel(); // get table model of delivery table
+        model.setRowCount(0); // clear existing rows in table
+
+        while ((line = br.readLine()) != null) { // read each line until end of file
+            String[] data = line.split(",",6); // split line into 6 parts using comma
+            if (data.length < 6) continue; // skip line if data is incomplete
+            Delivery d = new Delivery(data[0], data[1], data[2], data[3], data[4], data[5]); // create delivery object
+            model.addRow(new Object[]{ // add delivery data into table row
+                d.getDeliveryID(), // get delivery id
+                d.getAssignedRider(), // get assigned rider
+                d.getStatus(), // get delivery status
+                d.getNotes() // get delivery notes
         });
-}
-        br.close();
-
-    } catch (Exception e) {
-        System.out.println(e);
     }
-}
-    public void loadStats() {
-    int[] stats = FileHandler.getDeliveryStats();
-
-    lblCountPending.setText(String.valueOf(stats[0]));
-    lblCountOutDelivery.setText(String.valueOf(stats[1]));
-    lblCountDeliver.setText(String.valueOf(stats[2]));
-  
+        br.close(); // close the file reader
+    } catch (Exception e) { // catch any errors
+        System.out.println(e); // print error in console
+        }
     }
-  
-  
+    public void loadStats() { // method to load delivery statistics
+    int[] stats = FileHandler.getDeliveryStats(); // get delivery statistics from filehandler
+    lblCountPending.setText(String.valueOf(stats[0])); // display pending count
+    lblCountOutDelivery.setText(String.valueOf(stats[1])); // display out for delivery count
+    lblCountDeliver.setText(String.valueOf(stats[2])); // display delivered count
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -126,7 +120,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         riderDateUpdate.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         riderDateUpdate.setForeground(new java.awt.Color(62, 39, 35));
-        riderDateUpdate.setText("May, 27, 2026");
+        riderDateUpdate.setText("June 01, 2026");
         AdminDashboard.add(riderDateUpdate);
         riderDateUpdate.setBounds(500, 40, 90, 16);
 
@@ -223,7 +217,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         btnRiders.setBackground(new java.awt.Color(243, 233, 220));
         btnRiders.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnRiders.setForeground(new java.awt.Color(62, 39, 35));
-        btnRiders.setText("RIDERS");
+        btnRiders.setText("RIDERS LIST");
         btnRiders.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRidersActionPerformed(evt);
@@ -278,6 +272,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAssignDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignDeliveryActionPerformed
@@ -288,22 +283,18 @@ public class AdminDashboard extends javax.swing.JFrame {
     private void btnRidersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRidersActionPerformed
        new RidersList().setVisible(true);
        dispose();
-             
     }//GEN-LAST:event_btnRidersActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         int choice = JOptionPane.showConfirmDialog(this,  "Are you sure you want to log out?", "Confirm Logout", JOptionPane.YES_NO_OPTION);
 
-    if (choice == JOptionPane.YES_OPTION) {
-    this.dispose(); // close current dashboard
-    new Login().setVisible(true); // go back to login
-    }
-        dispose();
+        if (choice == JOptionPane.YES_OPTION) {
+            this.dispose(); // close current dashboard
+            new Login().setVisible(true); // go back to login
+        }
+            dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

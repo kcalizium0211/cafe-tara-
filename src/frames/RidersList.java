@@ -1,53 +1,44 @@
-
 package frames;
+import java.io.BufferedReader; // used to read text files line by line
+import java.io.FileReader; // used to open and read files
+import javax.swing.table.DefaultTableModel; // used to manage table data
+import models.Rider; // import rider model class
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import javax.swing.table.DefaultTableModel;
-import models.Rider;
-
-public class RidersList extends javax.swing.JFrame {
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RidersList.class.getName());
-
-
-    public RidersList() {
-        initComponents();
-        loadRiderList();
-        
+public class RidersList extends javax.swing.JFrame { // create riders list form
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RidersList.class.getName()); // create logger for errors and messages
+ 
+    public RidersList() { // constructor for riders list form
+        initComponents(); // initialize form components
+        loadRiderList(); // load rider data into table
     }
-    public void loadRiderList() {
+    
+    public void loadRiderList() { // method to load rider list
+    try { // start try block
+        BufferedReader br = new BufferedReader(new FileReader("userinfo.txt")); // open user info file
+        String line; // variable to store each line
+        DefaultTableModel model = (DefaultTableModel) tblRiderInfo.getModel(); // get table model
+        model.setRowCount(0); // clear existing table rows
 
-    try {
-        BufferedReader br = new BufferedReader(new FileReader("userinfo.txt"));
+        while ((line = br.readLine()) != null) { // read file line by line
+            String[] data = line.split(","); // split line using comma
+            if (data.length < 4) continue; // skip incomplete data
+            String riderId = data[0].trim(); // get rider id
+            String username = data[1].trim(); // get username
+            String role = data[3].trim(); // get user role
 
-        String line;
-
-        DefaultTableModel model = (DefaultTableModel) tblRiderInfo.getModel();
-        model.setRowCount(0);
-
-        while ((line = br.readLine()) != null) {
-
-            String[] data = line.split(",");
-
-            if (data.length < 4) continue;
-
-            String riderId = data[0].trim();
-            String username = data[1].trim();
-            String role = data[3].trim();
-
-            if (role.equalsIgnoreCase("Rider")) {
-                Rider r = new Rider(username, data[2]);
-                model.addRow(new Object[]{
-                riderId, r.getUsername(),"Available"});
-}
+            if (role.equalsIgnoreCase("Rider")) { // check if role is rider
+                Rider r = new Rider(username, data[2]); // create rider object
+                model.addRow(new Object[]{ // add rider data into table
+                riderId, // display rider id
+                r.getUsername(), // display username
+                "Available"}); // display rider status
+            }
         }
-
-        br.close();
-
-    } catch (Exception e) {
-        System.out.println(e);
-    }
-}
+        br.close(); // close file reader
+    } catch (Exception e) { // catch errors
+        System.out.println(e); // print error in console
+        }
+    }    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -105,9 +96,10 @@ public class RidersList extends javax.swing.JFrame {
         btnBacktoDashboard.setBounds(50, 270, 280, 23);
 
         getContentPane().add(RiderStatusBoard);
-        RiderStatusBoard.setBounds(0, 0, 390, 350);
+        RiderStatusBoard.setBounds(0, 0, 390, 370);
 
-        setBounds(0, 0, 400, 358);
+        setSize(new java.awt.Dimension(400, 375));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBacktoDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBacktoDashboardActionPerformed
@@ -115,7 +107,6 @@ public class RidersList extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnBacktoDashboardActionPerformed
 
-   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

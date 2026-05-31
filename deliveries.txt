@@ -1,3 +1,4 @@
 D001,Jamela Kate Trivilegio,Barroc,Just leave it in the gate,Sam,Out for Delivery
-D002,Samantha Mei Torio,Parara Sur,tanginamo janah,Kim,Out for Delivery
+D002,Samantha Mei Torio,Parara Sur,tanginamo janah,Kim,Delivered
 D003,kim panot,jaro,sagwa lng please,Janah,Out for Delivery
+D004,Rejoice Quimba,Jalbuena Subdivision,at the back of Toyota,Sam,Pending

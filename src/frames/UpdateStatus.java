@@ -1,84 +1,72 @@
 package frames;
 
-import frames.RiderDashboard;
-import java.io.*;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import models.Delivery;
-import models.Rider;
+import frames.RiderDashboard; // import rider dashboard frame
+import java.io.*; // import all input and output classes
+import java.io.BufferedWriter; // used to write text into files
+import java.io.FileWriter; // used to create or write files
+import javax.swing.*; // import swing components
+import javax.swing.table.DefaultTableModel; // used to manage table data
+import models.Delivery; // import delivery model class
+import models.Rider; // import rider model class
 
+public class UpdateStatus extends javax.swing.JFrame { // create update status form
+    private Delivery delivery; // variable to store selected delivery
+    private Rider rider; // variable to store logged in rider
 
-public class UpdateStatus extends javax.swing.JFrame {
-
-        private Delivery delivery;
-        private Rider rider;
-
-    public UpdateStatus(Delivery delivery, Rider rider) {
-    initComponents();
-    this.delivery = delivery;
-    this.rider = rider;
-    lblDeliveryId.setText(delivery.getDeliveryID());
-    lblCustomer.setText(delivery.getCustomerName());
-    lblAddress.setText(delivery.getAddress());
-    lblStatus.setText(delivery.getStatus());
-    textArea_Notes.setText(delivery.getNotes());
+    public UpdateStatus(Delivery delivery, Rider rider) { // constructor with delivery and rider parameter
+        initComponents(); // initialize form components
+        this.delivery = delivery; // store delivery object
+        this.rider = rider; // store rider object
+        
+        //display all the info from delivery models
+        lblDeliveryId.setText(delivery.getDeliveryID()); 
+        lblCustomer.setText(delivery.getCustomerName()); 
+        lblAddress.setText(delivery.getAddress()); 
+        lblStatus.setText(delivery.getStatus()); 
+        textArea_Notes.setText(delivery.getNotes()); 
+    }
     
-}
-    public void loadDetails(String deliveryId) {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("deliveries.txt"));
-
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                String[] data = line.split(",",6);
-                if (data[0].equals(deliveryId)) {
-                    lblDeliveryId.setText(data[0]);
-                    lblCustomer.setText(data[1]);
-                    lblAddress.setText(data[2]);
-                    textArea_Notes.setText(data[3]);             
-                    break;
+    public void loadDetails(String deliveryId) { // method to load delivery details
+        try { // start try block
+            BufferedReader br = new BufferedReader(new FileReader("deliveries.txt")); // open deliveries file
+            String line; // variable to store each line
+            while ((line = br.readLine()) != null) { // read file line by line
+                String[] data = line.split(",",6); // split line into 6 parts
+                if (data[0].equals(deliveryId)) { // check matching delivery id
+                    lblDeliveryId.setText(data[0]); // display delivery id
+                    lblCustomer.setText(data[1]); // display customer name
+                    lblAddress.setText(data[2]); // display address
+                    textArea_Notes.setText(data[3]); // display notes            
+                    break; // stop loop after finding delivery
                 }
             }
-
-            br.close();
-
-        } catch (Exception e) {
-            System.out.println(e);
+            br.close(); // close file reader
+        } catch (Exception e) { // catch errors
+            System.out.println(e); // print error in console
         }
     }
 
-    // ✅ ADD THIS INSIDE CLASS (NOT OUTSIDE)
-    public void loadDelivery(String riderName) {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("deliveries.txt"));
-
-            String line;
-
-            while ((line = br.readLine()) != null) {
-
-                String[] data = line.split(",");
-
-                if (data[4].equalsIgnoreCase(riderName)) {
-                    lblDeliveryId.setText(data[0]);
-                    lblCustomer.setText(data[1]);
-                    lblAddress.setText(data[2]);
-                    textArea_Notes.setText(data[3]);
+    public void loadDelivery(String riderName) { // method to load rider delivery
+        try { // start try block
+            BufferedReader br = new BufferedReader(new FileReader("deliveries.txt")); // open deliveries file
+            String line; // variable to store each line
+            while ((line = br.readLine()) != null) { // read file line by line
+                String[] data = line.split(","); // split line using comma
+                if (data[4].equalsIgnoreCase(riderName)) { // check matching rider name
+                    //display information 
+                    lblDeliveryId.setText(data[0]); 
+                    lblCustomer.setText(data[1]); 
+                    lblAddress.setText(data[2]); 
+                    textArea_Notes.setText(data[3]); 
                     cmbStatus.setSelectedItem(data[5]);
                 }
             }
 
-            br.close();
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-       
-    }
-
-    @SuppressWarnings("unchecked")
+            br.close(); // close file reader
+        } catch (Exception e) { // catch errors
+            System.out.println(e); // print error in console
+        }  
+    }    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -142,27 +130,27 @@ public class UpdateStatus extends javax.swing.JFrame {
         UpdateStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         UpdateStatus.setText("UPDATE STATUS");
         DeliveryStatusBoard.add(UpdateStatus);
-        UpdateStatus.setBounds(20, 140, 140, 19);
+        UpdateStatus.setBounds(20, 150, 140, 19);
 
         lblSelectNewStat.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         lblSelectNewStat.setForeground(new java.awt.Color(62, 39, 35));
         lblSelectNewStat.setText("Select New Status:");
         DeliveryStatusBoard.add(lblSelectNewStat);
-        lblSelectNewStat.setBounds(30, 170, 100, 16);
+        lblSelectNewStat.setBounds(30, 180, 100, 16);
 
         cmbStatus.setBackground(new java.awt.Color(111, 78, 55));
         cmbStatus.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         cmbStatus.setForeground(new java.awt.Color(62, 39, 35));
         cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Out for Delivery", "Delivered" }));
         DeliveryStatusBoard.add(cmbStatus);
-        cmbStatus.setBounds(150, 170, 150, 22);
+        cmbStatus.setBounds(140, 172, 160, 30);
 
         lblusnotes.setBackground(new java.awt.Color(243, 233, 220));
         lblusnotes.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         lblusnotes.setForeground(new java.awt.Color(62, 39, 35));
         lblusnotes.setText("Notes (Optional):");
         DeliveryStatusBoard.add(lblusnotes);
-        lblusnotes.setBounds(40, 200, 110, 16);
+        lblusnotes.setBounds(40, 220, 110, 16);
 
         btnUpdateStatus.setBackground(new java.awt.Color(111, 78, 55));
         btnUpdateStatus.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -174,7 +162,7 @@ public class UpdateStatus extends javax.swing.JFrame {
             }
         });
         DeliveryStatusBoard.add(btnUpdateStatus);
-        btnUpdateStatus.setBounds(50, 300, 260, 23);
+        btnUpdateStatus.setBounds(50, 320, 260, 23);
 
         textArea_Notes.setColumns(20);
         textArea_Notes.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
@@ -182,7 +170,7 @@ public class UpdateStatus extends javax.swing.JFrame {
         jScrollPane1.setViewportView(textArea_Notes);
 
         DeliveryStatusBoard.add(jScrollPane1);
-        jScrollPane1.setBounds(30, 220, 300, 70);
+        jScrollPane1.setBounds(30, 240, 300, 70);
 
         lblStatus.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         lblStatus.setText("-");
@@ -197,7 +185,7 @@ public class UpdateStatus extends javax.swing.JFrame {
         lblAddress.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         lblAddress.setText("-");
         DeliveryStatusBoard.add(lblAddress);
-        lblAddress.setBounds(140, 90, 170, 20);
+        lblAddress.setBounds(140, 90, 170, 16);
 
         lblDeliveryId.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         lblDeliveryId.setText("-");
@@ -205,48 +193,43 @@ public class UpdateStatus extends javax.swing.JFrame {
         lblDeliveryId.setBounds(140, 50, 170, 20);
 
         getContentPane().add(DeliveryStatusBoard);
-        DeliveryStatusBoard.setBounds(0, 0, 360, 350);
+        DeliveryStatusBoard.setBounds(0, 0, 360, 400);
 
-        setBounds(0, 0, 375, 355);
+        setSize(new java.awt.Dimension(373, 394));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateStatusActionPerformed
-    String newStatus = cmbStatus.getSelectedItem().toString();
-    String id = delivery.getDeliveryID();
-    delivery.setStatus(newStatus);
+    String newStatus = cmbStatus.getSelectedItem().toString(); // get selected status from combo box
+    String id = delivery.getDeliveryID(); // get delivery id
+    delivery.setStatus(newStatus); // update delivery object status
 
-    try {
-        BufferedReader br = new BufferedReader(new FileReader("deliveries.txt"));
-        StringBuilder sb = new StringBuilder();
-
-        String line;
-        while ((line = br.readLine()) != null) {
-            String[] data = line.split(",",6);
-
-            if (data[0].equals(id) && data.length >= 6) {
-                data[5] = newStatus; // update status column
-                line = String.join(",", data);
-            }
-
-            sb.append(line).append("\n");
+    try { // start try block
+        BufferedReader br = new BufferedReader(new FileReader("deliveries.txt")); // open deliveries file for reading
+        StringBuilder sb = new StringBuilder(); // used to store updated file content
+        String line; // variable to store each line
+    while ((line = br.readLine()) != null) { // read file line by line
+        String[] data = line.split(",",6); // split line into 6 parts
+        if (data[0].equals(id) && data.length >= 6) { // check matching delivery id
+            data[5] = newStatus; // update status column
+            line = String.join(",", data); // combine updated data into one line
         }
-        br.close();
-
-        BufferedWriter bw = new BufferedWriter(new FileWriter("deliveries.txt"));
-        bw.write(sb.toString());
-        bw.close();
-
-        JOptionPane.showMessageDialog(this, "Status updated to: " + newStatus);
-
-        // Go back to dashboard with refreshed stats
-        RiderDashboard rd = new RiderDashboard(rider);
-        rd.setVisible(true);
-        dispose();
-
-    } catch (Exception e) {
-        System.out.println(e);
+        sb.append(line).append("\n"); // add line into string builder
     }
+        br.close(); // close file reader
+        BufferedWriter bw = new BufferedWriter(new FileWriter("deliveries.txt")); // open file for writing
+        bw.write(sb.toString()); // write updated content into file
+        bw.close(); // close file writer
+        JOptionPane.showMessageDialog(this, "Status updated to: " + newStatus); // show success message
 
+        // go back to dashboard with refreshed stats
+        RiderDashboard rd = new RiderDashboard(rider); // create rider dashboard
+        rd.setVisible(true); // show rider dashboard
+        dispose(); // close current form
+    
+    } catch (Exception e) { // catch errors
+        System.out.println(e); // print error in console
+    }
     }//GEN-LAST:event_btnUpdateStatusActionPerformed
 
     public static void main(String args[]) {

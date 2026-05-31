@@ -1,4 +1,4 @@
-R001,kim,1234,Rider,Queen Kimberly Calimbo,Brgy. Cubay Jaro Iloilo City,09109985590,Motorcycle,L13XV21,Available
+R001,kim,1234,Rider,Queen Kimberly Calimbo,Brgy. Cubay Jaro Cebu City,09109985590,Motorcycle,L13XV21,Available
 R002,sam,1324,Rider,Samantha Mei Torio,Brgy. Parara Sur Tigbauan Iloilo,09636131893,Motorcycle,J4M1324,Available
 R003,janah,6226,Rider,Janah Louisse Morallos,Brgy. Balabago Jaro Iloilo City,09071521646,Motorcycle,L4WR904,Available
 admin1,cafetara2026,Admin

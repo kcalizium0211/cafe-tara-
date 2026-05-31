@@ -1,23 +1,21 @@
 package frames;
+import java.io.BufferedReader; // used to read text files line by line
+import java.io.BufferedWriter; // used to write text into files
+import java.io.FileReader; // used to open and read files
+import java.io.FileWriter; // used to create or write files
+import java.io.IOException; // handles file errors
+import javax.swing.JOptionPane; // used for popup messages
+import javax.swing.JComboBox; // used for combo box component
+import javax.swing.JTable; // used for table component
+import javax.swing.table.DefaultTableModel; // used to manage table data
+import models.Delivery; // import delivery model class
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import javax.swing.JOptionPane;
-import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import models.Delivery;
-
-public class AssignDelivery extends javax.swing.JFrame {
+public class AssignDelivery extends javax.swing.JFrame { // create assign delivery form
    
-    public AssignDelivery() {
-        initComponents();
+    public AssignDelivery() { // constructor for assign delivery form
+        initComponents(); // initialize form components
     }
-
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -92,7 +90,6 @@ public class AssignDelivery extends javax.swing.JFrame {
         lblnotes.setBounds(30, 130, 100, 16);
 
         textArea_Notes.setColumns(20);
-        textArea_Notes.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
         textArea_Notes.setRows(5);
         jScrollPane1.setViewportView(textArea_Notes);
 
@@ -109,19 +106,19 @@ public class AssignDelivery extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnAssignDelivery);
-        btnAssignDelivery.setBounds(40, 300, 260, 23);
+        btnAssignDelivery.setBounds(20, 320, 140, 23);
 
         btnBacktoDashboard.setBackground(new java.awt.Color(111, 78, 55));
         btnBacktoDashboard.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnBacktoDashboard.setForeground(new java.awt.Color(243, 233, 220));
-        btnBacktoDashboard.setText("BACK TO DASHBOARD");
+        btnBacktoDashboard.setText("BACK");
         btnBacktoDashboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBacktoDashboardActionPerformed(evt);
             }
         });
         jPanel1.add(btnBacktoDashboard);
-        btnBacktoDashboard.setBounds(40, 330, 260, 23);
+        btnBacktoDashboard.setBounds(180, 320, 140, 23);
 
         lblcustomer1.setForeground(new java.awt.Color(62, 39, 35));
         lblcustomer1.setText("Customer Name:");
@@ -135,9 +132,10 @@ public class AssignDelivery extends javax.swing.JFrame {
         txtCustomerName.setBounds(140, 80, 160, 22);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 340, 390);
+        jPanel1.setBounds(0, 0, 340, 410);
 
-        setBounds(0, 0, 355, 395);
+        setSize(new java.awt.Dimension(355, 416));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbRiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRiderActionPerformed
@@ -145,35 +143,33 @@ public class AssignDelivery extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbRiderActionPerformed
 
     private void btnAssignDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignDeliveryActionPerformed
-    String id = txtDeliveryId.getText().trim();
-    String customer = txtCustomerName.getText().trim();
-    String address = txtAddress.getText().trim();
-    String notes = textArea_Notes.getText().trim();
-    String rider = cmbRider.getSelectedItem().toString();
+    String id = txtDeliveryId.getText().trim(); // get delivery id from textbox
+    String customer = txtCustomerName.getText().trim(); // get customer name from textbox
+    String address = txtAddress.getText().trim(); // get address from textbox
+    String notes = textArea_Notes.getText().trim(); // get notes from text area
+    String rider = cmbRider.getSelectedItem().toString(); // get selected rider from combo box
 
-    if (id.isEmpty() || customer.isEmpty() || address.isEmpty() || rider == null) {
-    JOptionPane.showMessageDialog(this, "Please fill in all required fields.");
-    return;
+    if (id.isEmpty() || customer.isEmpty() || address.isEmpty() || rider == null) { // check if required fields are empty
+        JOptionPane.showMessageDialog(this, "Please fill in all required fields."); // show warning message
+    return; // stop the code
     }
 
-    String status = "Pending";
+    String status = "Pending"; // set default delivery status
+    
+    try { // start try block
+    Delivery d = new Delivery(id, customer, address, notes, rider, status); // create delivery object
+    BufferedWriter bw = new BufferedWriter(new FileWriter("deliveries.txt", true)); // open deliveries file in append mode
+    bw.write(d.getDeliveryID() + "," + d.getCustomerName() + "," + d.getAddress() + "," + d.getNotes() + "," + d.getAssignedRider() + "," + d.getStatus()); // write delivery data into file
+    bw.newLine(); // move to next line in file
+    bw.close(); // close file writer
 
-    try {
-        Delivery d = new Delivery(id, customer, address, notes, rider, status);
+    JOptionPane.showMessageDialog(this, "Delivery Assigned Successfully!"); // show success message
 
-        BufferedWriter bw = new BufferedWriter(new FileWriter("deliveries.txt", true));
-            bw.write(d.getDeliveryID() + "," + d.getCustomerName() + "," + d.getAddress() + "," + d.getNotes() + "," + d.getAssignedRider() + "," + d.getStatus());
-            bw.newLine();
-            bw.close();
+    new AdminDashboard().setVisible(true); // open admin dashboard
+    this.dispose(); // close current form
 
-    JOptionPane.showMessageDialog(this, "Delivery Assigned Successfully!");
-
-    // go back to admin dashboard
-    new AdminDashboard().setVisible(true);
-    this.dispose();
-
-    } catch (Exception e) {
-    JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+    } catch (Exception e) { // catch errors
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage()); // show error message
     }
     }//GEN-LAST:event_btnAssignDeliveryActionPerformed
 

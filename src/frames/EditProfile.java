@@ -1,133 +1,99 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package frames;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import models.Rider;
+import java.io.BufferedReader; // used to read text files line by line
+import java.io.File; // used to work with files
+import java.io.FileReader; // used to open and read files
+import java.io.FileWriter; // used to write into files
+import java.io.PrintWriter; // used to write formatted text into files
+import models.Rider; // import rider model class
 
-public class EditProfile extends javax.swing.JFrame {
+public class EditProfile extends javax.swing.JFrame { // create edit profile form
+    private Rider rider; // variable to store logged in rider
 
-    /**
-     * Creates new form RiderProfile
-     */
-    private Rider rider;
-
-    public EditProfile(Rider rider) {
-    initComponents();
-    this.rider = rider;
-    loadProfile();
+    public EditProfile(Rider rider) { // constructor with rider parameter
+        initComponents(); // initialize form components
+        this.rider = rider; // store rider object into variable
+        loadProfile(); // load rider profile data
     }
     
-    public void loadProfile() {
+    public void loadProfile() { // method to load rider profile
+    try { // start try block
+        BufferedReader br = new BufferedReader(new FileReader("userinfo.txt")); // open user info file
+        String line; // variable to store each line
 
-    try {
-        BufferedReader br = new BufferedReader(new FileReader("userinfo.txt"));
-        String line;
-
-        while ((line = br.readLine()) != null) {
-
-            String[] data = line.split(",");
-
-            if (data.length >= 10 &&
-                data[1].trim().equalsIgnoreCase(rider.getUsername())) {
-
+        while ((line = br.readLine()) != null) { // read file line by line
+            String[] data = line.split(","); // split line using comma
+            if (data.length >= 10 && // check if data is complete
+                data[1].trim().equalsIgnoreCase(rider.getUsername())) { // check matching username
+                //load profile using setters
                 rider.setRiderID(data[0]);
-                rider.setFullname(data[4]);
-                rider.setAddress(data[5]);
-                rider.setContactNo(data[6]);
-                rider.setVehicleType(data[7]);
-                rider.setPlateNo(data[8]);
-                rider.setStatus(data[9]);
+                rider.setFullname(data[4]); 
+                rider.setAddress(data[5]); 
+                rider.setContactNo(data[6]); 
+                rider.setVehicleType(data[7]); 
+                rider.setPlateNo(data[8]); 
+                rider.setStatus(data[9]); 
 
-                lblRidersId.setText(rider.getRiderID());
-
-                txtFullname.setText(rider.getFullname());
-                txtAddress.setText(rider.getAddress());
-                txtContactNo.setText(rider.getContactNo());
-                txtvehicleType.setText(rider.getVehicleType());
-                txtPlateNo.setText(rider.getPlateNo());
-
-                break;
+                lblRidersId.setText(rider.getRiderID()); // display rider id
+                txtFullname.setText(rider.getFullname()); // display full name
+                txtAddress.setText(rider.getAddress()); // display address
+                txtContactNo.setText(rider.getContactNo()); // display contact number
+                txtvehicleType.setText(rider.getVehicleType()); // display vehicle type
+                txtPlateNo.setText(rider.getPlateNo()); // display plate number
+                break; // stop loop after finding rider
             }
         }
 
-        br.close();
+        br.close(); // close file reader
 
-    } catch (Exception e) {
-        e.printStackTrace();
+    } catch (Exception e) { // catch errors
+        e.printStackTrace(); // print error details
     }
 }
-    
-    private void saveProfile() {
+    private void saveProfile() { // method to save updated profile
+    try { // start try block
 
-    try {
+        // update rider object using setters
+        rider.setFullname(txtFullname.getText().trim()); 
+        rider.setAddress(txtAddress.getText().trim()); 
+        rider.setContactNo(txtContactNo.getText().trim()); 
+        rider.setVehicleType(txtvehicleType.getText().trim()); 
+        rider.setPlateNo(txtPlateNo.getText().trim()); 
+        
+        File inputFile = new File("userinfo.txt"); // original file
+        File tempFile = new File("temp.txt"); // temporary file
 
-        // Update Rider object using setters
-        rider.setFullname(txtFullname.getText().trim());
-        rider.setAddress(txtAddress.getText().trim());
-        rider.setContactNo(txtContactNo.getText().trim());
-        rider.setVehicleType(txtvehicleType.getText().trim());
-        rider.setPlateNo(txtPlateNo.getText().trim());
-
-        File inputFile = new File("userinfo.txt");
-        File tempFile = new File("temp.txt");
-
-        BufferedReader br = new BufferedReader(new FileReader(inputFile));
-        PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
-
-        String line;
-
-        while ((line = br.readLine()) != null) {
-
-            String[] data = line.split(",");
-
-            if (data.length >= 10 &&
-                data[1].trim().equalsIgnoreCase(rider.getUsername())) {
-
-                data[4] = rider.getFullname();
-                data[5] = rider.getAddress();
-                data[6] = rider.getContactNo();
-                data[7] = rider.getVehicleType();
-                data[8] = rider.getPlateNo();
-                data[9] = rider.getStatus();
-
-                line = String.join(",", data);
+        BufferedReader br = new BufferedReader(new FileReader(inputFile)); // read original file
+        PrintWriter pw = new PrintWriter(new FileWriter(tempFile)); // write into temp file
+        
+        String line; // variable to store each line
+        while ((line = br.readLine()) != null) { // read file line by line
+            String[] data = line.split(","); // split line using comma
+            if (data.length >= 10 && // check if data is complete
+                data[1].trim().equalsIgnoreCase(rider.getUsername())) { // check matching username
+                data[4] = rider.getFullname(); // update full name
+                data[5] = rider.getAddress(); // update address
+                data[6] = rider.getContactNo(); // update contact number
+                data[7] = rider.getVehicleType(); // update vehicle type
+                data[8] = rider.getPlateNo(); // update plate number
+                data[9] = rider.getStatus(); // update status
+                line = String.join(",", data); // combine updated data into one line
             }
-
-            pw.println(line);
+            pw.println(line); // write line into temp file
         }
 
-        br.close();
-        pw.close();
+        br.close(); // close file reader
+        pw.close(); // close print writer
+        inputFile.delete(); // delete old file
+        tempFile.renameTo(inputFile); // rename temp file into original file
 
-        inputFile.delete();
-        tempFile.renameTo(inputFile);
+        javax.swing.JOptionPane.showMessageDialog(this, "Profile updated successfully!"); // show success message
 
+    } catch (Exception e) { // catch errors
         javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "Profile updated successfully!"
-        );
-
-    } catch (Exception e) {
-
-        javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "Error: " + e.getMessage()
-        );
+                this, "Error: " + e.getMessage()); // show error message
     }
 }
-
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -203,7 +169,7 @@ public class EditProfile extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btnSave);
-        btnSave.setBounds(90, 380, 192, 23);
+        btnSave.setBounds(90, 370, 192, 23);
 
         lblRidersId.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         lblRidersId.setForeground(new java.awt.Color(62, 39, 35));
@@ -248,31 +214,27 @@ public class EditProfile extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-     if (txtFullname.getText().trim().isEmpty()
+     //check if the txt is empty or not
+        if (txtFullname.getText().trim().isEmpty()
             || txtAddress.getText().trim().isEmpty()
             || txtContactNo.getText().trim().isEmpty()
             || txtvehicleType.getText().trim().isEmpty()
             || txtPlateNo.getText().trim().isEmpty()) {
 
-        javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "Please fill in all fields."
-        );
+        javax.swing.JOptionPane.showMessageDialog(this,"Please fill in all fields.");
         return;
     }
-
-    saveProfile();
+        saveProfile();
+        
     new RiderProfile(rider).setVisible(true);
     dispose();
     
     }//GEN-LAST:event_btnSaveActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
