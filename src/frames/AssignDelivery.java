@@ -1,5 +1,15 @@
 package frames;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import models.Delivery;
 
 public class AssignDelivery extends javax.swing.JFrame {
    
@@ -135,7 +145,36 @@ public class AssignDelivery extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbRiderActionPerformed
 
     private void btnAssignDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignDeliveryActionPerformed
+    String id = txtDeliveryId.getText().trim();
+    String customer = txtCustomerName.getText().trim();
+    String address = txtAddress.getText().trim();
+    String notes = textArea_Notes.getText().trim();
+    String rider = cmbRider.getSelectedItem().toString();
 
+    if (id.isEmpty() || customer.isEmpty() || address.isEmpty() || rider == null) {
+    JOptionPane.showMessageDialog(this, "Please fill in all required fields.");
+    return;
+    }
+
+    String status = "Pending";
+
+    try {
+        Delivery d = new Delivery(id, customer, address, notes, rider, status);
+
+        BufferedWriter bw = new BufferedWriter(new FileWriter("deliveries.txt", true));
+            bw.write(d.getDeliveryID() + "," + d.getCustomerName() + "," + d.getAddress() + "," + d.getNotes() + "," + d.getAssignedRider() + "," + d.getStatus());
+            bw.newLine();
+            bw.close();
+
+    JOptionPane.showMessageDialog(this, "Delivery Assigned Successfully!");
+
+    // go back to admin dashboard
+    new AdminDashboard().setVisible(true);
+    this.dispose();
+
+    } catch (Exception e) {
+    JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnAssignDeliveryActionPerformed
 
     private void btnBacktoDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBacktoDashboardActionPerformed

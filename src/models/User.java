@@ -1,12 +1,12 @@
 package models;
 
 // Parent class
-public class User {
+    public class User {
 
-    // Encapsulated data (private)
-    private String username;
-    private String password;
-    private String role;
+        // Encapsulated data (private)
+        private String username;
+        private String password;
+        private String role;
 
     // Constructor
     public User(String username, String password, String role) {
@@ -46,7 +46,7 @@ public class User {
     }
 
     // Method to override later (Polymorphism)
-    public void displayDashboard() {
-        System.out.println("Opening dashboard...");
+    public void login () {
+        System.out.println("User Login");
     }
 }

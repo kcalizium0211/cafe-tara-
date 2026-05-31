@@ -12,8 +12,8 @@ public class Admin extends User {
 
     // Polymorphism (Method Override)
     @Override
-    public void displayDashboard() {
+    public void login() {
 
-        System.out.println("Admin Dashboard Opened");
+        System.out.println("Admin Login");
     }
 }

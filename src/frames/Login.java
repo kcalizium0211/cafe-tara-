@@ -1,4 +1,3 @@
-
 package frames;
 
 import frames.AdminDashboard;
@@ -10,6 +9,7 @@ import javax.swing.JOptionPane;
 import utility.FileHandler;
 import models.Admin;
 import models.Rider;
+import models.User;
 
 public class Login extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Login.class.getName());
@@ -30,9 +30,7 @@ public class Login extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
         lblUsername = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
-        cmbRole = new javax.swing.JComboBox<>();
         btnLogin = new javax.swing.JButton();
-        lblContactAdmin = new javax.swing.JLabel();
         LoginIcon = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,18 +83,6 @@ public class Login extends javax.swing.JFrame {
         LoginInfo.add(lblPassword);
         lblPassword.setBounds(20, 220, 70, 19);
 
-        cmbRole.setBackground(new java.awt.Color(111, 78, 55));
-        cmbRole.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        cmbRole.setForeground(new java.awt.Color(62, 39, 35));
-        cmbRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rider", "Admin" }));
-        cmbRole.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbRoleActionPerformed(evt);
-            }
-        });
-        LoginInfo.add(cmbRole);
-        cmbRole.setBounds(50, 270, 210, 30);
-
         btnLogin.setBackground(new java.awt.Color(62, 39, 35));
         btnLogin.setFont(new java.awt.Font("Serif", 1, 12)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(255, 255, 255));
@@ -108,12 +94,6 @@ public class Login extends javax.swing.JFrame {
         });
         LoginInfo.add(btnLogin);
         btnLogin.setBounds(100, 320, 90, 24);
-
-        lblContactAdmin.setForeground(new java.awt.Color(62, 39, 35));
-        lblContactAdmin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblContactAdmin.setText("<html><u>No account? Contact Admin</u></html>");
-        LoginInfo.add(lblContactAdmin);
-        lblContactAdmin.setBounds(50, 380, 190, 16);
 
         LoginIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LoginIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/coffee bean.png"))); // NOI18N
@@ -128,12 +108,10 @@ public class Login extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(LoginInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(LoginInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        setBounds(0, 0, 315, 446);
+        setBounds(0, 0, 315, 409);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
@@ -144,42 +122,39 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsernameActionPerformed
 
-    private void cmbRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRoleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbRoleActionPerformed
-
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
     String username = txtUsername.getText();
     String password = String.valueOf(txtPassword.getPassword());
-    String role = cmbRole.getSelectedItem().toString();
-
+            
     if (username.isEmpty() || password.isEmpty()) {
      JOptionPane.showMessageDialog(this, "Please enter username and password.");
         return;
-    } try {
-    BufferedWriter writer = new BufferedWriter(
-    new FileWriter("src/utility/userinfo.txt", true));
-    writer.write(username + "," + password + "," + role);
-    writer.newLine();
-    writer.close();
-    JOptionPane.showMessageDialog(this, "Account Saved! Logging in...");
-    txtUsername.setText("");
-    txtPassword.setText("");
-
-    // Open dashboard based on role
-    if (role.equals("Admin")) {
+        
+}
+        
+    User user = FileHandler.loginUser(username, password);
+    
+    if (user != null) {
+        JOptionPane.showMessageDialog(this, "Login Successful");
+    
+    if (user instanceof Admin) {
         AdminDashboard ad = new AdminDashboard();
         ad.setVisible(true);
-        dispose();
-    } else {
-        RiderDashboard rd = new RiderDashboard();
-        rd.setVisible(true);
-        dispose();
-    }
+    } else if (user instanceof Rider) {
+    Rider rider = (Rider) user;
+    String fileUser = username; // ✅ ADD THIS LINE ONLY
 
-     } catch (IOException e) {
-    JOptionPane.showMessageDialog(this, e);
-    }
+    RiderDashboard rd = new RiderDashboard(rider);
+    rd.setVisible(true);
+}
+    dispose();
+    
+} else {
+        JOptionPane.showMessageDialog(this,"Invalid username or password");
+}
+
+
+    
     }//GEN-LAST:event_btnLoginActionPerformed
 
     public static void main(String args[]) {
@@ -192,8 +167,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel LoginInfo;
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel cafeName;
-    private javax.swing.JComboBox<String> cmbRole;
-    private javax.swing.JLabel lblContactAdmin;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JLabel title;

@@ -4,42 +4,122 @@
  */
 package frames;
 
-import models.Rider;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import models.Rider;
 
-public class RiderProfile extends javax.swing.JFrame {
+public class EditProfile extends javax.swing.JFrame {
 
     /**
      * Creates new form RiderProfile
      */
     private Rider rider;
 
-    public RiderProfile(Rider rider) {
+    public EditProfile(Rider rider) {
     initComponents();
     this.rider = rider;
     loadProfile();
     }
     
     public void loadProfile() {
+
     try {
         BufferedReader br = new BufferedReader(new FileReader("userinfo.txt"));
         String line;
+
         while ((line = br.readLine()) != null) {
+
             String[] data = line.split(",");
-            if (data[1].trim().equalsIgnoreCase(rider.getUsername())) {
-                lblRidersId.setText(data[0]);
-                lblFullname.setText(data.length > 4 ? data[4] : "-");
-                lblAddress.setText(data.length > 5 ? data[5] : "-");
-                lblContactNo.setText(data.length > 6 ? data[6] : "-");
-                lblVehicleType.setText(data.length > 7 ? data[7] : "-");
-                lblPlateNo.setText(data.length > 8 ? data[8] : "-");
+
+            if (data.length >= 10 &&
+                data[1].trim().equalsIgnoreCase(rider.getUsername())) {
+
+                rider.setRiderID(data[0]);
+                rider.setFullname(data[4]);
+                rider.setAddress(data[5]);
+                rider.setContactNo(data[6]);
+                rider.setVehicleType(data[7]);
+                rider.setPlateNo(data[8]);
+                rider.setStatus(data[9]);
+
+                lblRidersId.setText(rider.getRiderID());
+
+                txtFullname.setText(rider.getFullname());
+                txtAddress.setText(rider.getAddress());
+                txtContactNo.setText(rider.getContactNo());
+                txtvehicleType.setText(rider.getVehicleType());
+                txtPlateNo.setText(rider.getPlateNo());
+
                 break;
             }
         }
+
         br.close();
+
     } catch (Exception e) {
-        System.out.println(e);
+        e.printStackTrace();
+    }
+}
+    
+    private void saveProfile() {
+
+    try {
+
+        // Update Rider object using setters
+        rider.setFullname(txtFullname.getText().trim());
+        rider.setAddress(txtAddress.getText().trim());
+        rider.setContactNo(txtContactNo.getText().trim());
+        rider.setVehicleType(txtvehicleType.getText().trim());
+        rider.setPlateNo(txtPlateNo.getText().trim());
+
+        File inputFile = new File("userinfo.txt");
+        File tempFile = new File("temp.txt");
+
+        BufferedReader br = new BufferedReader(new FileReader(inputFile));
+        PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
+
+        String line;
+
+        while ((line = br.readLine()) != null) {
+
+            String[] data = line.split(",");
+
+            if (data.length >= 10 &&
+                data[1].trim().equalsIgnoreCase(rider.getUsername())) {
+
+                data[4] = rider.getFullname();
+                data[5] = rider.getAddress();
+                data[6] = rider.getContactNo();
+                data[7] = rider.getVehicleType();
+                data[8] = rider.getPlateNo();
+                data[9] = rider.getStatus();
+
+                line = String.join(",", data);
+            }
+
+            pw.println(line);
+        }
+
+        br.close();
+        pw.close();
+
+        inputFile.delete();
+        tempFile.renameTo(inputFile);
+
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Profile updated successfully!"
+        );
+
+    } catch (Exception e) {
+
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Error: " + e.getMessage()
+        );
     }
 }
 
@@ -60,16 +140,15 @@ public class RiderProfile extends javax.swing.JFrame {
         ADDRESS = new javax.swing.JLabel();
         CONTACTNO = new javax.swing.JLabel();
         lblpfp = new javax.swing.JLabel();
-        btnEditProfile = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
         lblRidersId = new javax.swing.JLabel();
         VEHICLLETYPE = new javax.swing.JLabel();
         PLATENO = new javax.swing.JLabel();
-        btnBacktoDashboard = new javax.swing.JButton();
-        lblFullname = new javax.swing.JLabel();
-        lblAddress = new javax.swing.JLabel();
-        lblContactNo = new javax.swing.JLabel();
-        lblVehicleType = new javax.swing.JLabel();
-        lblPlateNo = new javax.swing.JLabel();
+        txtFullname = new javax.swing.JTextField();
+        txtAddress = new javax.swing.JTextField();
+        txtContactNo = new javax.swing.JTextField();
+        txtvehicleType = new javax.swing.JTextField();
+        txtPlateNo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,7 +159,7 @@ public class RiderProfile extends javax.swing.JFrame {
 
         lblad.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         lblad.setForeground(new java.awt.Color(62, 39, 35));
-        lblad.setText("RIDER'S PROFILE");
+        lblad.setText("EDIT PROFILE");
         jPanel2.add(lblad);
         lblad.setBounds(15, 19, 180, 24);
 
@@ -114,17 +193,17 @@ public class RiderProfile extends javax.swing.JFrame {
         jPanel2.add(lblpfp);
         lblpfp.setBounds(132, 49, 100, 100);
 
-        btnEditProfile.setBackground(new java.awt.Color(111, 78, 55));
-        btnEditProfile.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        btnEditProfile.setForeground(new java.awt.Color(243, 233, 220));
-        btnEditProfile.setText("EDIT PROFILE");
-        btnEditProfile.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setBackground(new java.awt.Color(111, 78, 55));
+        btnSave.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnSave.setForeground(new java.awt.Color(243, 233, 220));
+        btnSave.setText("SAVE");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditProfileActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
-        jPanel2.add(btnEditProfile);
-        btnEditProfile.setBounds(80, 390, 192, 23);
+        jPanel2.add(btnSave);
+        btnSave.setBounds(90, 380, 192, 23);
 
         lblRidersId.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         lblRidersId.setForeground(new java.awt.Color(62, 39, 35));
@@ -143,76 +222,53 @@ public class RiderProfile extends javax.swing.JFrame {
         PLATENO.setText("PLATE NO.:");
         jPanel2.add(PLATENO);
         PLATENO.setBounds(30, 320, 102, 16);
-
-        btnBacktoDashboard.setBackground(new java.awt.Color(111, 78, 55));
-        btnBacktoDashboard.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        btnBacktoDashboard.setForeground(new java.awt.Color(243, 233, 220));
-        btnBacktoDashboard.setText("BACK TO DASHBOARD");
-        btnBacktoDashboard.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBacktoDashboardActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnBacktoDashboard);
-        btnBacktoDashboard.setBounds(80, 430, 192, 23);
-
-        lblFullname.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        lblFullname.setForeground(new java.awt.Color(62, 39, 35));
-        lblFullname.setText("-");
-        jPanel2.add(lblFullname);
-        lblFullname.setBounds(150, 200, 210, 16);
-
-        lblAddress.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        lblAddress.setForeground(new java.awt.Color(62, 39, 35));
-        lblAddress.setText("-");
-        jPanel2.add(lblAddress);
-        lblAddress.setBounds(150, 230, 210, 16);
-
-        lblContactNo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        lblContactNo.setForeground(new java.awt.Color(62, 39, 35));
-        lblContactNo.setText("-");
-        jPanel2.add(lblContactNo);
-        lblContactNo.setBounds(150, 260, 210, 16);
-
-        lblVehicleType.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        lblVehicleType.setForeground(new java.awt.Color(62, 39, 35));
-        lblVehicleType.setText("-");
-        jPanel2.add(lblVehicleType);
-        lblVehicleType.setBounds(150, 290, 210, 16);
-
-        lblPlateNo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        lblPlateNo.setForeground(new java.awt.Color(62, 39, 35));
-        lblPlateNo.setText("-");
-        jPanel2.add(lblPlateNo);
-        lblPlateNo.setBounds(150, 320, 210, 16);
+        jPanel2.add(txtFullname);
+        txtFullname.setBounds(150, 200, 200, 22);
+        jPanel2.add(txtAddress);
+        txtAddress.setBounds(150, 230, 200, 22);
+        jPanel2.add(txtContactNo);
+        txtContactNo.setBounds(150, 260, 200, 22);
+        jPanel2.add(txtvehicleType);
+        txtvehicleType.setBounds(150, 290, 200, 22);
+        jPanel2.add(txtPlateNo);
+        txtPlateNo.setBounds(150, 320, 200, 22);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 0, 370, 470);
+        jPanel2.setBounds(0, 0, 380, 430);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEditProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditProfileActionPerformed
-     new EditProfile(rider).setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btnEditProfileActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+     if (txtFullname.getText().trim().isEmpty()
+            || txtAddress.getText().trim().isEmpty()
+            || txtContactNo.getText().trim().isEmpty()
+            || txtvehicleType.getText().trim().isEmpty()
+            || txtPlateNo.getText().trim().isEmpty()) {
 
-    private void btnBacktoDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBacktoDashboardActionPerformed
-        // TODO add your handling code here:
-        new RiderDashboard(rider).setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btnBacktoDashboardActionPerformed
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Please fill in all fields."
+        );
+        return;
+    }
+
+    saveProfile();
+    new RiderProfile(rider).setVisible(true);
+    dispose();
+    
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,14 +287,17 @@ public class RiderProfile extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RiderProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RiderProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RiderProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RiderProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -256,17 +315,16 @@ public class RiderProfile extends javax.swing.JFrame {
     private javax.swing.JLabel PLATENO;
     private javax.swing.JLabel RIDERSID;
     private javax.swing.JLabel VEHICLLETYPE;
-    private javax.swing.JButton btnBacktoDashboard;
-    private javax.swing.JButton btnEditProfile;
+    private javax.swing.JButton btnSave;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lblAddress;
-    private javax.swing.JLabel lblContactNo;
-    private javax.swing.JLabel lblFullname;
-    private javax.swing.JLabel lblPlateNo;
     private javax.swing.JLabel lblRidersId;
-    private javax.swing.JLabel lblVehicleType;
     private javax.swing.JLabel lblad;
     private javax.swing.JLabel lblpfp;
+    private javax.swing.JTextField txtAddress;
+    private javax.swing.JTextField txtContactNo;
+    private javax.swing.JTextField txtFullname;
+    private javax.swing.JTextField txtPlateNo;
+    private javax.swing.JTextField txtvehicleType;
     // End of variables declaration//GEN-END:variables
 }

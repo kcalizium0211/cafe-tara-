@@ -1,15 +1,53 @@
 
 package frames;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import javax.swing.table.DefaultTableModel;
+import models.Rider;
+
 public class RidersList extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RidersList.class.getName());
 
 
     public RidersList() {
         initComponents();
+        loadRiderList();
+        
     }
+    public void loadRiderList() {
 
+    try {
+        BufferedReader br = new BufferedReader(new FileReader("userinfo.txt"));
 
+        String line;
+
+        DefaultTableModel model = (DefaultTableModel) tblRiderInfo.getModel();
+        model.setRowCount(0);
+
+        while ((line = br.readLine()) != null) {
+
+            String[] data = line.split(",");
+
+            if (data.length < 4) continue;
+
+            String riderId = data[0].trim();
+            String username = data[1].trim();
+            String role = data[3].trim();
+
+            if (role.equalsIgnoreCase("Rider")) {
+                Rider r = new Rider(username, data[2]);
+                model.addRow(new Object[]{
+                riderId, r.getUsername(),"Available"});
+}
+        }
+
+        br.close();
+
+    } catch (Exception e) {
+        System.out.println(e);
+    }
+}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -19,8 +57,6 @@ public class RidersList extends javax.swing.JFrame {
         tblRiderInfo = new javax.swing.JTable();
         lblRiderStatus = new javax.swing.JLabel();
         btnBacktoDashboard = new javax.swing.JButton();
-        btnAddRider = new javax.swing.JButton();
-        btnDeleteRider = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -66,31 +102,7 @@ public class RidersList extends javax.swing.JFrame {
             }
         });
         RiderStatusBoard.add(btnBacktoDashboard);
-        btnBacktoDashboard.setBounds(50, 300, 280, 23);
-
-        btnAddRider.setBackground(new java.awt.Color(111, 78, 55));
-        btnAddRider.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        btnAddRider.setForeground(new java.awt.Color(243, 233, 220));
-        btnAddRider.setText("ADD RIDER");
-        btnAddRider.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddRiderActionPerformed(evt);
-            }
-        });
-        RiderStatusBoard.add(btnAddRider);
-        btnAddRider.setBounds(50, 270, 120, 23);
-
-        btnDeleteRider.setBackground(new java.awt.Color(111, 78, 55));
-        btnDeleteRider.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        btnDeleteRider.setForeground(new java.awt.Color(243, 233, 220));
-        btnDeleteRider.setText("DELETE RIDER");
-        btnDeleteRider.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteRiderActionPerformed(evt);
-            }
-        });
-        RiderStatusBoard.add(btnDeleteRider);
-        btnDeleteRider.setBounds(210, 270, 120, 23);
+        btnBacktoDashboard.setBounds(50, 270, 280, 23);
 
         getContentPane().add(RiderStatusBoard);
         RiderStatusBoard.setBounds(0, 0, 390, 350);
@@ -99,17 +111,9 @@ public class RidersList extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBacktoDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBacktoDashboardActionPerformed
-        new RiderDashboard().setVisible(true);
+        new AdminDashboard().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnBacktoDashboardActionPerformed
-
-    private void btnAddRiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRiderActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddRiderActionPerformed
-
-    private void btnDeleteRiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteRiderActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDeleteRiderActionPerformed
 
    
     public static void main(String args[]) {
@@ -137,9 +141,7 @@ public class RidersList extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane RiderInfo;
     private javax.swing.JPanel RiderStatusBoard;
-    private javax.swing.JButton btnAddRider;
     private javax.swing.JButton btnBacktoDashboard;
-    private javax.swing.JButton btnDeleteRider;
     private javax.swing.JLabel lblRiderStatus;
     private javax.swing.JTable tblRiderInfo;
     // End of variables declaration//GEN-END:variables

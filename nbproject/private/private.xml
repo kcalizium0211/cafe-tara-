@@ -3,17 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/kim/OneDrive/Dokumen/CompSci%20File/PROJECTS/Cafe,%20tara/cafe-tara-/src/frames/Login.java</file>
-            <file>file:/C:/Users/kim/OneDrive/Dokumen/CompSci%20File/PROJECTS/Cafe,%20tara/cafe-tara-/src/frames/AdminDashboard.java</file>
-            <file>file:/C:/Users/kim/OneDrive/Dokumen/CompSci%20File/PROJECTS/Cafe,%20tara/cafe-tara-/src/frames/RiderDashboard.java</file>
-            <file>file:/C:/Users/kim/OneDrive/Dokumen/CompSci%20File/PROJECTS/Cafe,%20tara/cafe-tara-/src/frames/RidersList.java</file>
-            <file>file:/C:/Users/kim/OneDrive/Dokumen/CompSci%20File/PROJECTS/Cafe,%20tara/cafe-tara-/src/frames/UpdateStatus.java</file>
-            <file>file:/C:/Users/kim/OneDrive/Dokumen/CompSci%20File/PROJECTS/Cafe,%20tara/cafe-tara-/src/frames/AssignDelivery.java</file>
-            <file>file:/C:/Users/kim/OneDrive/Dokumen/CompSci%20File/PROJECTS/Cafe,%20tara/cafe-tara-/src/models/User.java</file>
-            <file>file:/C:/Users/kim/OneDrive/Dokumen/CompSci%20File/PROJECTS/Cafe,%20tara/cafe-tara-/src/models/Admin.java</file>
-            <file>file:/C:/Users/kim/OneDrive/Dokumen/CompSci%20File/PROJECTS/Cafe,%20tara/cafe-tara-/src/models/Rider.java</file>
-            <file>file:/C:/Users/kim/OneDrive/Dokumen/CompSci%20File/PROJECTS/Cafe,%20tara/cafe-tara-/src/models/Delivery.java</file>
-            <file>file:/C:/Users/kim/OneDrive/Dokumen/CompSci%20File/PROJECTS/Cafe,%20tara/cafe-tara-/src/utility/FileHandler.java</file>
+            <file>file:/C:/ICT%20111-TORIO/cafe,%20ano%20tara/CafeAnoTara/src/frames/UpdateStatus.java</file>
+            <file>file:/C:/ICT%20111-TORIO/cafe,%20ano%20tara/CafeAnoTara/src/frames/RiderDashboard.java</file>
+            <file>file:/C:/ICT%20111-TORIO/cafe,%20ano%20tara/CafeAnoTara/src/frames/RiderProfile.java</file>
+            <file>file:/C:/ICT%20111-TORIO/cafe,%20ano%20tara/CafeAnoTara/src/frames/EditProfile.java</file>
+            <file>file:/C:/ICT%20111-TORIO/cafe,%20ano%20tara/CafeAnoTara/src/models/Rider.java</file>
+            <file>file:/C:/ICT%20111-TORIO/cafe,%20ano%20tara/CafeAnoTara/src/models/Delivery.java</file>
+            <file>file:/C:/ICT%20111-TORIO/cafe,%20ano%20tara/CafeAnoTara/src/utility/FileHandler.java</file>
+            <file>file:/C:/ICT%20111-TORIO/cafe,%20ano%20tara/CafeAnoTara/src/frames/Login.java</file>
         </group>
     </open-files>
 </project-private>

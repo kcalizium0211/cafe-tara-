@@ -1,5 +1,13 @@
-
 package frames;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;
+import utility.FileHandler;
+import models.Delivery;
 
 
 public class AdminDashboard extends javax.swing.JFrame {
@@ -7,8 +15,42 @@ public class AdminDashboard extends javax.swing.JFrame {
   
     public AdminDashboard() {
         initComponents();
+        loadDeliveries();
+        loadStats();
     }
 
+    public void loadDeliveries() {
+    try {
+        BufferedReader br = new BufferedReader(new FileReader("deliveries.txt"));
+        String line;
+        DefaultTableModel model = (DefaultTableModel) tblRecentDelivery.getModel();
+        model.setRowCount(0);
+        while ((line = br.readLine()) != null) {
+            String[] data = line.split(",",6);
+          if (data.length < 6) continue;
+            Delivery d = new Delivery(data[0], data[1], data[2], data[3], data[4], data[5]);
+            model.addRow(new Object[]{
+                d.getDeliveryID(),
+                d.getAssignedRider(),
+                d.getStatus(),
+                d.getNotes()
+        });
+}
+        br.close();
+
+    } catch (Exception e) {
+        System.out.println(e);
+    }
+}
+    public void loadStats() {
+    int[] stats = FileHandler.getDeliveryStats();
+
+    lblCountPending.setText(String.valueOf(stats[0]));
+    lblCountOutDelivery.setText(String.valueOf(stats[1]));
+    lblCountDeliver.setText(String.valueOf(stats[2]));
+  
+    }
+  
   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -25,17 +67,16 @@ public class AdminDashboard extends javax.swing.JFrame {
         lblPending = new javax.swing.JLabel();
         pendingIcon = new javax.swing.JLabel();
         activeRiders = new javax.swing.JPanel();
-        lblActiveRiders = new javax.swing.JLabel();
-        lblCountActiveRiders = new javax.swing.JLabel();
+        lblOutDelivery = new javax.swing.JLabel();
+        lblCountOutDelivery = new javax.swing.JLabel();
         activeRidersIcon = new javax.swing.JLabel();
         completeDelivery = new javax.swing.JPanel();
         lblCompleted = new javax.swing.JLabel();
-        lblCountComplete = new javax.swing.JLabel();
+        lblCountDeliver = new javax.swing.JLabel();
         completeIcon = new javax.swing.JLabel();
         AdminInfo = new javax.swing.JPanel();
         btnAssignDelivery = new javax.swing.JButton();
         btnRiders = new javax.swing.JButton();
-        btnProfile = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
         lblAdmin = new javax.swing.JLabel();
         lblAdminName = new javax.swing.JLabel();
@@ -49,22 +90,22 @@ public class AdminDashboard extends javax.swing.JFrame {
         RecentDelivery.setForeground(new java.awt.Color(62, 39, 35));
 
         tblRecentDelivery.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        tblRecentDelivery.setFont(new java.awt.Font("Segoe UI Emoji", 1, 12)); // NOI18N
+        tblRecentDelivery.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         tblRecentDelivery.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Delivery ID", "Calendar", "Rider", "Status"
+                "Delivery ID", "Rider", "Status"
             }
         ));
         RecentDelivery.setViewportView(tblRecentDelivery);
@@ -118,18 +159,18 @@ public class AdminDashboard extends javax.swing.JFrame {
         activeRiders.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(62, 39, 35), 2, true));
         activeRiders.setLayout(null);
 
-        lblActiveRiders.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        lblActiveRiders.setForeground(new java.awt.Color(62, 39, 35));
-        lblActiveRiders.setText("Active Riders");
-        activeRiders.add(lblActiveRiders);
-        lblActiveRiders.setBounds(80, 60, 70, 16);
+        lblOutDelivery.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        lblOutDelivery.setForeground(new java.awt.Color(62, 39, 35));
+        lblOutDelivery.setText("Out for Delivery");
+        activeRiders.add(lblOutDelivery);
+        lblOutDelivery.setBounds(70, 70, 90, 16);
 
-        lblCountActiveRiders.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
-        lblCountActiveRiders.setForeground(new java.awt.Color(62, 39, 35));
-        lblCountActiveRiders.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCountActiveRiders.setText("5");
-        activeRiders.add(lblCountActiveRiders);
-        lblCountActiveRiders.setBounds(80, 20, 60, 45);
+        lblCountOutDelivery.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
+        lblCountOutDelivery.setForeground(new java.awt.Color(62, 39, 35));
+        lblCountOutDelivery.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCountOutDelivery.setText("5");
+        activeRiders.add(lblCountOutDelivery);
+        lblCountOutDelivery.setBounds(80, 20, 60, 45);
 
         activeRidersIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         activeRidersIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/motor3.png"))); // NOI18N
@@ -145,16 +186,16 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         lblCompleted.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         lblCompleted.setForeground(new java.awt.Color(62, 39, 35));
-        lblCompleted.setText("Completed");
+        lblCompleted.setText("Delivered");
         completeDelivery.add(lblCompleted);
         lblCompleted.setBounds(80, 60, 70, 16);
 
-        lblCountComplete.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
-        lblCountComplete.setForeground(new java.awt.Color(62, 39, 35));
-        lblCountComplete.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCountComplete.setText("8");
-        completeDelivery.add(lblCountComplete);
-        lblCountComplete.setBounds(80, 20, 60, 45);
+        lblCountDeliver.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
+        lblCountDeliver.setForeground(new java.awt.Color(62, 39, 35));
+        lblCountDeliver.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCountDeliver.setText("8");
+        completeDelivery.add(lblCountDeliver);
+        lblCountDeliver.setBounds(80, 20, 60, 45);
 
         completeIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         completeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/check2.png"))); // NOI18N
@@ -177,7 +218,7 @@ public class AdminDashboard extends javax.swing.JFrame {
             }
         });
         AdminInfo.add(btnAssignDelivery);
-        btnAssignDelivery.setBounds(20, 150, 140, 23);
+        btnAssignDelivery.setBounds(10, 150, 160, 23);
 
         btnRiders.setBackground(new java.awt.Color(243, 233, 220));
         btnRiders.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -190,13 +231,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         });
         AdminInfo.add(btnRiders);
         btnRiders.setBounds(20, 200, 140, 23);
-
-        btnProfile.setBackground(new java.awt.Color(243, 233, 220));
-        btnProfile.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        btnProfile.setForeground(new java.awt.Color(62, 39, 35));
-        btnProfile.setText("PROFILE");
-        AdminInfo.add(btnProfile);
-        btnProfile.setBounds(20, 250, 140, 23);
 
         btnLogout.setBackground(new java.awt.Color(243, 233, 220));
         btnLogout.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -258,7 +292,12 @@ public class AdminDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRidersActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        new Login().setVisible(true);
+        int choice = JOptionPane.showConfirmDialog(this,  "Are you sure you want to log out?", "Confirm Logout", JOptionPane.YES_NO_OPTION);
+
+    if (choice == JOptionPane.YES_OPTION) {
+    this.dispose(); // close current dashboard
+    new Login().setVisible(true); // go back to login
+    }
         dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
 
@@ -305,19 +344,18 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel activeRidersIcon;
     private javax.swing.JButton btnAssignDelivery;
     private javax.swing.JButton btnLogout;
-    private javax.swing.JButton btnProfile;
     private javax.swing.JButton btnRiders;
     private javax.swing.JPanel completeDelivery;
     private javax.swing.JLabel completeIcon;
-    private javax.swing.JLabel lblActiveRiders;
     private javax.swing.JLabel lblAdmin;
     private javax.swing.JLabel lblAdminDashboard;
     private javax.swing.JLabel lblAdminName;
     private javax.swing.JLabel lblAdminProfile;
     private javax.swing.JLabel lblCompleted;
-    private javax.swing.JLabel lblCountActiveRiders;
-    private javax.swing.JLabel lblCountComplete;
+    private javax.swing.JLabel lblCountDeliver;
+    private javax.swing.JLabel lblCountOutDelivery;
     private javax.swing.JLabel lblCountPending;
+    private javax.swing.JLabel lblOutDelivery;
     private javax.swing.JLabel lblPending;
     private javax.swing.JLabel lblRecentDelivery;
     private javax.swing.JPanel pendingDeliveries;
